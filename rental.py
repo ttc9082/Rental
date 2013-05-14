@@ -4,8 +4,9 @@ import hashlib
 web.config.debug = False
 
 urls = (
-  '/login', 'login',
-  '/reset', 'reset',
+    '/login', 'login',
+    '/reset', 'reset',
+    '/sign_in', 'sign_in'
 )
 app = web.application(urls, locals())
 store = web.session.DiskStore('session')
@@ -13,11 +14,17 @@ session = web.session.Session(app, store, initializer={'userName': 0, 'privilege
 
 render = web.template.render('templates/')
 
+
 def logged():
     if session.userName:
         return True
     else:
         return False
+
+
+def cellphonecheck(number):
+    return True
+
 
 class login:
     def GET(self):
@@ -44,6 +51,7 @@ class login:
             session.privilege = 0
             return render.login_error()
 
+
 class reset:
     def GET(self):
         name = session.userName
@@ -51,6 +59,42 @@ class reset:
         session.kill()
         return render.logout(name)
 
+
+class sign_in:
+    def GET(self):
+        errors = web.input(errors=None)
+        print errors
+        return render.sign_in(errors.errors)
+
+    def POST(self):
+        name = web.input().user
+        passwd = web.input().passwd
+        passwdconf = web.input().passwdconf
+        emailadd = web.input().email
+        emailaddconf = web.input().emailconf
+        cellphone = web.input().cellphone
+        privilege = 1
+        # write these in DB here.
+        error_message = []
+        try:
+            if passwd != passwdconf:
+                error_message.append('Password Confirmation is Wrong.')
+            else:
+                pass
+            if emailadd != emailaddconf:
+                error_message.append('Email Confirmation is Wrong. ')
+            else:
+                pass
+            if not cellphonecheck(cellphone):
+                error_message.append('Cellphone number format is Wrong.')
+            else:
+                pass
+        except:
+            error_message = ['Unknown Error!']
+        if error_message:
+            return render.sign_in(error_message)
+        else:
+            return render.index('good')
 
 
 if __name__ == "__main__":
