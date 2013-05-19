@@ -4,12 +4,10 @@ $def with (message, postname, bucket)
     <title></title>
 </head>
 <body>
-$if message:
+$if message != None:
     $for m in message:
         <b>$m</b>
         <br>
-$else:
-    $pass
 <table>
     $if bucket:
         $for key in bucket:
@@ -20,14 +18,25 @@ $else:
             </tr>
             <tr>
                 <td>
-                    <img src="https://s3.amazonaws.com/$bucket.name/$key.name"/>
+                    <img src="https://s3.amazonaws.com/$bucket.name/$key.name" width="150" height="150">
                 </td>
             </tr>
+            <tr>
+                <td>
+                    <form action="/del" method="POST">
+                    <input type="hidden" name="bucketname" value=$bucket.name>
+                    <input type="hidden" name="keyname" value=$key.name>
+                    <input type="hidden" name="postname" value=$postname>
+                    <input type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+
 </table>
 
 <form action="/new" enctype="multipart/form-data" method="POST">
     <table>
-        $if postname.postname == None:
+        $if postname == None:
             <tr>
                 <td>postname :</td>
                 <td><input type='text' name="postname"></td>
@@ -35,13 +44,26 @@ $else:
         $else:
             <tr>
                 <td>postname :</td>
-                <td>$postname.postname</td>
+                <td>$postname</td>
                 <td><input type="hidden" name="alreadyHave" value="1"></td>
-                <td><input type="hidden" name="postname" value=$postname.postname></td>
+                <td><input type="hidden" name="postname" value=$postname></td>
             </tr>
         <tr>
             <td>name :</td>
             <td><input type='text' name="name"></td>
+        </tr>
+        <tr>
+            <td>Room Type :</td>
+            <td>
+                <select name="rooms">
+                <option value="volvo">Bedroom</option>
+                <option value="saab">Bathroom</option>
+                <option value="fiat">Dinning room</option>
+                <option value="audi">Kitchen</option>
+                <option value="audi">Living room</option>
+                <option value="audi">Balcony</option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td>file :</td>

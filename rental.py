@@ -9,7 +9,8 @@ urls = (
     '/login', 'login',
     '/reset', 'reset',
     '/sign_in', 'sign_in',
-    '/new', 'new'
+    '/new', 'new',
+    '/del', 'delete'
 )
 app = web.application(urls, locals())
 store = web.session.DiskStore('session')
@@ -102,17 +103,16 @@ class sign_in:
 
 class new:
     def GET(self):
-        message = web.input(message=None)
-        print message
+        message = web.input(message=None).message
         bucket = None
-        postname = web.input(postname=None)
+        postname = web.input(postname=None).postname
         return render.new(message, postname, bucket)
     def POST(self):
         S3 = AWS.AWSS3()
-        postname = web.input(postname={})
+        postname = web.input(postname={}).postname
         alreadyHave = web.input(alreadyHave={})
 
-        print postname.postname
+        print postname
         print alreadyHave.alreadyHave
 
         if not alreadyHave.alreadyHave:
@@ -142,6 +142,17 @@ class new:
         saved = S3.saveFile(bucket=bucket, name=name, file1=f.file2up.file)
         smessage = saved + ' has been saved!'
         return render.new([smessage], postname, bucket)
+
+class delete:
+    def POST(self):
+        x = web.input()
+        S3 = AWS.AWSS3()
+        bucket = S3.get_bucket(x.bucketname)
+        S3.delFile(x.keyname, x.bucketname)
+        message = x.keyname + ' is Deleted'
+        return render.new([message], x.postname, bucket)
+
+
 
 
 if __name__ == "__main__":
