@@ -1,0 +1,57 @@
+$def with (message, postname, bucket)
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+$if message:
+    $for m in message:
+        <b>$m</b>
+        <br>
+$else:
+    $pass
+<table>
+    $if bucket:
+        $for key in bucket:
+            <tr>
+                <td>
+                    $key.name
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="https://s3.amazonaws.com/$bucket.name/$key.name"/>
+                </td>
+            </tr>
+</table>
+
+<form action="/new" enctype="multipart/form-data" method="POST">
+    <table>
+        $if postname.postname == None:
+            <tr>
+                <td>postname :</td>
+                <td><input type='text' name="postname"></td>
+            </tr>
+        $else:
+            <tr>
+                <td>postname :</td>
+                <td>$postname.postname</td>
+                <td><input type="hidden" name="alreadyHave" value="1"></td>
+                <td><input type="hidden" name="postname" value=$postname.postname></td>
+            </tr>
+        <tr>
+            <td>name :</td>
+            <td><input type='text' name="name"></td>
+        </tr>
+        <tr>
+            <td>file :</td>
+            <td><input type='file' name="file2up"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="upload."></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

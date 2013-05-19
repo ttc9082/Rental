@@ -36,10 +36,10 @@ class AWSS3:
         k = myBucket.lookup(name)
         return k.get_contents_as_string()
 
-    def saveFile(self, bucket, name, filename):
+    def saveFile(self, bucket, name, file1):
         myBucket = self.conn.get_bucket(bucket)
         k = myBucket.new_key(name)
-        k.set_contents_from_filename(filename, policy='public-read')
+        k.set_contents_from_file(file1, policy='public-read')
         return k.name
 
     def delFile(self, name, bucket):
@@ -58,6 +58,10 @@ class AWSS3:
             return url
         else:
             return False
+    def get_bucket(self, name):
+        bucket = self.conn.get_bucket(name)
+        return bucket
+
 
     def get_all_buckets(self):
         buckets = self.conn.get_all_buckets()

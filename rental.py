@@ -1,12 +1,15 @@
 import web
 import hashlib
+import random
+from tool import AWS
 
 web.config.debug = False
 
 urls = (
     '/login', 'login',
     '/reset', 'reset',
-    '/sign_in', 'sign_in'
+    '/sign_in', 'sign_in',
+    '/new', 'new'
 )
 app = web.application(urls, locals())
 store = web.session.DiskStore('session')
@@ -25,7 +28,8 @@ def logged():
 def cellphonecheck(number):
     return True
 
-
+def validName(name):
+    return True
 class login:
     def GET(self):
         if logged():
@@ -95,6 +99,49 @@ class sign_in:
             return render.sign_in(error_message)
         else:
             return render.index('good')
+
+class new:
+    def GET(self):
+        message = web.input(message=None)
+        print message
+        bucket = None
+        postname = web.input(postname=None)
+        return render.new(message, postname, bucket)
+    def POST(self):
+        S3 = AWS.AWSS3()
+        postname = web.input(postname={})
+        alreadyHave = web.input(alreadyHave={})
+
+        print postname.postname
+        print alreadyHave.alreadyHave
+
+        if not alreadyHave.alreadyHave:
+            num = 0
+            while num < 10:
+                try:
+                    name = 'rental_id_' + str(random.randint(1000, 9999))
+                    S3.create_bucket(name)
+                    break
+                except:
+                    num += 1
+                    pass
+            # build a relationship between this bucket's name and the post's name here.
+
+
+        #find bucket name in the table with the postname
+        bucket_name = 'rental_id_7547'
+        bucket = S3.get_bucket(bucket_name)
+        f = web.input(file2up={})
+        filename = f.file2up.filename
+        ext = filename.split('.')[-1]
+        if validName(web.input().name):
+            name = web.input().name + '.' + ext
+        else:
+            errors = ['name error.']
+            return render.new(errors, postname, bucket)
+        saved = S3.saveFile(bucket=bucket, name=name, file1=f.file2up.file)
+        smessage = saved + ' has been saved!'
+        return render.new([smessage], postname, bucket)
 
 
 if __name__ == "__main__":
