@@ -16,5 +16,6 @@
 
 /.idea
 /*.*xml
-/*.pyc
+*.pyc
+/*/*.pyc
 /.DS_Store
