@@ -132,6 +132,8 @@ class new:
         bucket_name = 'rental_id_7547'
         bucket = S3.get_bucket(bucket_name)
         f = web.input(file2up={})
+        room_type = web.input().rooms
+        print room_type
         filename = f.file2up.filename
         ext = filename.split('.')[-1]
         if validName(web.input().name):
@@ -139,8 +141,9 @@ class new:
         else:
             errors = ['name error.']
             return render.new(errors, postname, bucket)
-        saved = S3.saveFile(bucket=bucket, name=name, file1=f.file2up.file)
-        smessage = saved + ' has been saved!'
+        s3_file = room_type + '/' + name
+        saved = S3.saveFile(bucket=bucket, name=s3_file, file1=f.file2up.file)
+        smessage = saved[4:] + ' has been saved!'
         return render.new([smessage], postname, bucket)
 
 class delete:
