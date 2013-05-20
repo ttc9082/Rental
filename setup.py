@@ -12,6 +12,8 @@ SETUP.create_room_table()
 # Room.insert(room_data)
 
 # p=User.validate_passwd("zz")
+u=User.find_by_id(1)
+print u[1]
 # rs= Room.show_all()
 # print len(rs)
 # myroom = Room.show_my_rooms(1)

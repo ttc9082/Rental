@@ -19,13 +19,13 @@ urls = (
 
 app = web.application(urls, locals())
 store = web.session.DiskStore('session')
-session = web.session.Session(app, store, initializer={'userName': 0, 'privilege': 0})
+session = web.session.Session(app, store, initializer={'userId': 0, 'privilege': 0})
 
 render = web.template.render('templates/')
 
 
 def logged():
-    if session.userName:
+    if session.userId:
         return True
     else:
         return False
@@ -39,7 +39,8 @@ def validName(name):
 class login:
     def GET(self):
         if logged():
-            return render.index(session.userName)
+            userName = User.find_by_id(session.userId)[1]
+            return render.index(userName)
         else:
             return render.login()
 
@@ -48,26 +49,27 @@ class login:
         userPassword = User.find_passwd(name)
         try:
             if hashlib.md5(passwd).hexdigest() in userPassword:
-                session.userName = name
+                session.userId = name
                 privilege = 1 # check privilege by name in DB
                 session.privilege = privilege
-                return render.login_ok(session.userName)
+                userName = User.find_by_id(session.userId)[1]
+                return render.login_ok(userName)
             else:
-                session.userName = 0
+                session.userId = 0
                 session.privilege = 0
                 return render.login_error()
         except:
-            session.userName = 0
+            session.userId = 0
             session.privilege = 0
             return render.login_error()
 
 
 class logout:
     def GET(self):
-        name = session.userName
-        session.userName = 0
+        uid = session.userId
+        session.userId = 0
         session.kill()
-        return render.logout(name)
+        return render.logout(uid)
 
 
 class sign_up:
@@ -173,8 +175,7 @@ class delete:
 
 class index:
     def GET(self):
-        print session.userName
-        if session.userName:
+        if not logged():
             print 'not logged in'
         all_room = Room.show_all()
         return render.index('123')
