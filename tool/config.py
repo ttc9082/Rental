@@ -6,7 +6,7 @@ my_secret_key = "T4XAjmttzZKpMkhdM9brSkvsCtkprh/Iuud8hu46" # Secret Key Here
 # host='myyoutube1.cr9jz9vodyut.us-east-1.rds.amazonaws.com'
 # user='ttc'
 # passwd='w0aiyehuan'
-# db='myyoutube'
+# db='rental'
 
 host='localhost'
 user='root'

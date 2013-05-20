@@ -122,39 +122,46 @@ class new:
 
     def GET(self):
         message = web.input(message=None).message
-        bucket = None
-        des = 0
-        price = 0
-        status = '1'
-        postname = web.input(postname=None).postname
-        return render.new(message, postname, bucket, des, price, status)
+        rid, bucket, title, des, price, location, status = None, None, None, None, None, None, None
+        return render.new(message, rid, bucket, title, des, price, location, status)
 
     def POST(self):
         S3 = AWS.AWSS3()
-        alreadyHave = web.input(alreadyHave={})
+
         uid = session.userId
-        title = web.input.tit
+        title = web.input().tit
         des = web.input().des
         price = web.input().price
         location = web.input().loc
         status = web.input().status
         rid = web.input().rid
 
+        print "====================="
         print rid
+        print uid
+        print title
+        print des
+        print location
+        print price
+        print status
+        print "====================="
 
         if not rid:
             num = 0
             while num < 10:
                 try:
                     bname = 'rental_id_' + str(random.randint(1000, 9999))
-                    S3.create_bucket(name)
+                    S3.create_bucket(bname)
                     break
                 except:
                     num += 1
                     pass
-            room_data = [uid, title, des, loc, price, bname, 0]
+            room_data = [uid, title, des, location, price, bname, 0]
+            print room_data
             Room.insert(room_data)
             rid = Room.count_row()
+            print "---------rid---------"
+            print rid
         else:
             bname = Room.find_by_id(rid)[7]
 
@@ -169,11 +176,11 @@ class new:
             name = web.input().name + '.' + ext
         else:
             errors = ['name error.']
-            return render.new(errors, postname, bucket, des, price, status)
+            return render.new(errors, rid, bucket, title, des, price, location, status)
         s3_file = room_type + '/' + name
         saved = S3.saveFile(bucket=bucket, name=s3_file, file1=f.file2up.file)
         smessage = saved[4:] + ' has been saved!'
-        return render.new([smessage], postname, bucket, des, price, status)
+        return render.new([smessage], rid, bucket, title, des, price, location, status)
 
 
 class delete:

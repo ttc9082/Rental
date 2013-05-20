@@ -97,6 +97,7 @@ class Room:
     @classmethod
     def count_row(self):
         sql1 = "SELECT TABLE_ROWS FROM information_schema.tables WHERE table_name='Room' AND table_schema = DATABASE();"
+        cursor = self.conn.cursor()
         cursor.execute(sql1)
         return_data = cursor.fetchall()
         cursor.close()
