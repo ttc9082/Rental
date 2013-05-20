@@ -13,7 +13,8 @@ urls = (
     '/new', 'new',
     '/del', 'delete',
     '/', 'index',
-    '/index', 'index'
+    '/index', 'index', 
+    '/show/(.*)', 'show'
 )
 
 app = web.application(urls, locals())
@@ -28,7 +29,6 @@ def logged():
         return True
     else:
         return False
-
 
 def cellphonecheck(number):
     return True
@@ -168,10 +168,11 @@ class delete:
 class index:
     def GET(self):
         all_room = Room.show_all()
-
         return render.index(all_room)
 
-
+class show:
+    def GET(self, id):
+        my_room = Room.show_my_rooms(id)
 
 
 

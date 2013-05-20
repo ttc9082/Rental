@@ -30,18 +30,6 @@ class SETUP:
         self.conn.commit()
         return 1
 
-    # def create_attachment_table(self):
-    #     # aid, rid, attribute, is_pic, s3key (5)
-    #     cursor = self.conn.cursor()
-    #     sql = "CREATE TABLE Attachment(aid serial NOT NULL AUTO_INCREMENT, rid integer NOT NULL, attribute VARCHAR(100), is_pic boolean NOT NULL DEFAULT true, s3key VARCHAR(500) NOT NULL, PRIMARY KEY (aid) )"
-    #     try:
-    #         cursor.execute(sql)
-    #     except Exception,e:
-    #         print e
-    #     cursor.close()
-    #     self.conn.commit()
-    #     return 1
-
     @classmethod
     def drop_tables(self):
         cursor = self.conn.cursor()
@@ -55,9 +43,7 @@ class SETUP:
         return 1
 
 
-
 class User:
-
     conn = MySQLdb.connect(host = config.host, user = config.user, passwd = config.passwd, db = config.db)
 
     @classmethod
@@ -70,13 +56,6 @@ class User:
             cursor.execute(sql)
         except Exception,e:
             print e
-
-        # sql1 = "SELECT TABLE_ROWS FROM information_schema.tables WHERE table_name='User' AND table_schema = DATABASE();"
-        # cursor.execute(sql1)
-        # return_data = cursor.fetchall()
-        # cursor.close()
-        # self.uid = int(return_data[0][0])
-
         self.conn.commit()
         return 1
 
@@ -112,7 +91,15 @@ class Room:
         cursor = self.conn.cursor()
         cursor.execute(sql)
         data = cursor.fetchall()
-        # ls = list(data)
+        cursor.close()
+        return data
+
+    @classmethod
+    def show_my_rooms(self, uid):
+        sql = "SELECT * FROM `Room` WHERE `uid` = '%s'" % (uid)
+        cursor = self.conn.cursor()
+        cursor.execute(sql)
+        data = cursor.fetchall()
         cursor.close()
         return data
 

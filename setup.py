@@ -13,3 +13,6 @@ from rentaldb import *
 
 # p=User.validate_passwd("zz")
 rs= Room.show_all()
+print rs
+# myroom = Room.show_my_rooms(1)
+# print myroom
