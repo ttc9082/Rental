@@ -1,3 +1,4 @@
+$def with (errors)
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,7 +30,7 @@
       }
       
       .form-signin {
-        	max-width: 1200px;
+        	max-width: 800px;
 	        padding: 19px 29px 29px;
 	        margin: auto auto 20px;
 	        background-color: #fff;
@@ -62,7 +63,7 @@
     <![endif]-->
 
     <!-- Fav and touch icons -->
-    <script src="../static/js/holder.js"></script>
+    <script src="js/holder.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
   </head>
@@ -75,18 +76,9 @@
           <a class="brand" href="#">Room Rental</a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
-            $if not name.strip():
-	        	<p class="navbar-text pull-right">
-	            <a href="#" class="navbar-link">Sign up</a>
-	          	or
-	            <a href="#" class="navbar-link">Log in</a>
-	            </p>
-            $else:
-	            <p class="navbar-text pull-right">
-	            $name
-	            or
-	            <a href="#" class="navbar-link">Log out</a>
-	            </p>
+              <a href="#" class="navbar-link">Sign in</a>
+              or
+              <a href="#" class="navbar-link">Log in</a>
             </p>
             <ul class="nav">
               <li><a href="#">New</a></li>
@@ -104,7 +96,51 @@
     </div>
  	<div class="container">
 
-      	
+      	<form class="form-signin form-horizontal">
+  <div class="control-group">
+    <label class="control-label" for="inputpostname">Postname</label>
+    <div class="controls">
+      <input type="text" id="inputpostname" placeholder="Postname">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputName">Name</label>
+    <div class="controls">
+      <input type="text" id="inputName" placeholder="Name">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputAddress">Address</label>
+    <div class="controls">
+      <input type="text" id="inputAddress" placeholder="Address">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputDescription">Description</label>
+    <div class="controls">
+      <textarea type="text" id="inputDescription" placeholder="Description" rows="3"></textarea>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputRoomtype">Description</label>
+    <div class="controls">
+        <select name="rooms" id="inputRoomtype">
+        <option value="bed">Bedroom</option>
+        <option value="bat">Bathroom</option>
+        <option value="din">Dinning room</option>
+        <option value="kit">Kitchen</option>
+        <option value="liv">Living room</option>
+        <option value="oth">Other</option>
+        </select>
+    </div>
+  </div>
+    <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-success">Submit</button>
+      <button type="button" class="btn">Cancel</button>
+    </div>
+  </div>
+      	</form>
 
     </div> <!-- /container -
 
