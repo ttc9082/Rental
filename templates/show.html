@@ -5,28 +5,28 @@ $def with (title, des, loc, price, bucket, status)
 </head>
 <body>
 <table>
-    <tr>
+    <tr id=1>
         <b>Bedroom</b>pics:
     </tr>
-    <tr>
+    <tr id=2>
         $for key in bucket:
             $if key.name[:4] == 'bed/':
-                <td>key.name[4:]</td>
+                <td>$key.name[4:]</td>
     </tr>
-    <tr>
+    <tr id=3>
         $for key in bucket:
             $if key.name[:4] == 'bed/':
                 <td><img src="https://s3.amazonaws.com/$bucket.name/$key.name" width="150" height="150"></td>
     </tr>
-    <tr>
+    <tr id=4>
         <b>Bathroom</b>pics:
     </tr>
-    <tr>
+    <tr id=5>
         $for key in bucket:
             $if key.name[:4] == 'bat/':
-                <td>key.name[4:]</td>
+                <td>$key.name[4:]</td>
     </tr>
-    <tr>
+    <tr id=6>
         $for key in bucket:
             $if key.name[:4] == 'bat/':
                 <td><img src="https://s3.amazonaws.com/$bucket.name/$key.name" width="150" height="150"></td>
@@ -37,7 +37,7 @@ $def with (title, des, loc, price, bucket, status)
     <tr>
         $for key in bucket:
             $if key.name[:4] == 'din/':
-                <td>key.name[4:]</td>
+                <td>$key.name[4:]</td>
     </tr>
     <tr>
         $for key in bucket:
@@ -50,7 +50,7 @@ $def with (title, des, loc, price, bucket, status)
     <tr>
         $for key in bucket:
             $if key.name[:4] == 'kit/':
-                <td>key.name[4:]</td>
+                <td>$key.name[4:]</td>
     </tr>
     <tr>
         $for key in bucket:
@@ -63,7 +63,7 @@ $def with (title, des, loc, price, bucket, status)
     <tr>
         $for key in bucket:
             $if key.name[:4] == 'liv/':
-                <td>key.name[4:]</td>
+                <td>$key.name[4:]</td>
     </tr>
     <tr>
         $for key in bucket:
@@ -76,7 +76,7 @@ $def with (title, des, loc, price, bucket, status)
     <tr>
         $for key in bucket:
             $if key.name[:4] == 'oth/':
-                <td>key.name[4:]</td>
+                <td>$key.name[4:]</td>
     </tr>
     <tr>
         $for key in bucket:
