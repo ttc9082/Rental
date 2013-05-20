@@ -48,16 +48,18 @@ class login:
         name, passwd = web.input().user, web.input().passwd
         userPassword = User.find_passwd(name)
         try:
-            if hashlib.md5(passwd).hexdigest() in userPassword:
-                session.userId = name
-                privilege = 1 # check privilege by name in DB
-                session.privilege = privilege
-                userName = User.find_by_id(session.userId)[1]
-                return render.login_ok(userName)
-            else:
-                session.userId = 0
-                session.privilege = 0
-                return render.login_error()
+            flag = False
+            ps = User.validate_passwd("zz")
+            for p in ps:
+                if hashlib.md5(passwd).hexdigest() == p[0]:
+                    session.userId = p[1]
+                    privilege = 1 # check privilege by name in DB
+                    session.privilege = privilege
+                    userName = User.find_by_id(session.userId)[1]
+                    return render.login_ok(userName)
+            session.userId = 0
+            session.privilege = 0
+            return render.login_error()
         except:
             session.userId = 0
             session.privilege = 0
