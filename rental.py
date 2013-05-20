@@ -2,13 +2,14 @@ import web
 import hashlib
 import random
 from tool import AWS
+from tool import rentaldb
 
 web.config.debug = False
 
 urls = (
     '/login', 'login',
     '/reset', 'reset',
-    '/sign_in', 'sign_in',
+    '/sign_up', 'sign_up',
     '/new', 'new',
     '/del', 'delete'
 )
@@ -31,7 +32,7 @@ def cellphonecheck(number):
 
 def validName(name):
     return True
-    
+
 class login:
     def GET(self):
         if logged():
@@ -41,9 +42,9 @@ class login:
 
     def POST(self):
         name, passwd = web.input().user, web.input().passwd
-        userPassword = '07f793d559d19bba6263b082cf20703d' # check password by name in DB (encoded in MD5)
+        userPassword = User.validate_passwd(name)
         try:
-            if hashlib.md5(passwd).hexdigest() == userPassword:
+            if hashlib.md5(passwd).hexdigest() in userPassword:
                 session.userName = name
                 privilege = 1 # check privilege by name in DB
                 session.privilege = privilege
@@ -66,11 +67,11 @@ class reset:
         return render.logout(name)
 
 
-class sign_in:
+class sign_up:
     def GET(self):
         errors = web.input(errors=None)
         print errors
-        return render.sign_in(errors.errors)
+        return render.sign_up(errors.errors)
 
     def POST(self):
         name = web.input().user
@@ -98,7 +99,7 @@ class sign_in:
         except:
             error_message = ['Unknown Error!']
         if error_message:
-            return render.sign_in(error_message)
+            return render.sign_up(error_message)
         else:
             return render.index('good')
 

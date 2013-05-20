@@ -2,6 +2,7 @@ import MySQLdb
 import config
 
 class SQL_init:
+    conn = MySQLdb.connect(host = config.host, user = config.user, passwd = config.passwd, db = config.db)
 
     def __init__(self):
         self.conn = MySQLdb.connect(host = config.host,user = config.user, passwd = config.passwd,db = config.db)
@@ -56,6 +57,7 @@ class SQL_init:
 
 
 class User:
+    conn = MySQLdb.connect(host = config.host, user = config.user, passwd = config.passwd, db = config.db)
 
     def __init__(self):
         self.conn = MySQLdb.connect(host = config.host, user = config.user, passwd = config.passwd, db = config.db)
@@ -85,6 +87,16 @@ class User:
 
         self.conn.commit()
         return 1
+
+    @classmethod
+    def validate_passwd(self, username):
+        sql = "SELECT `password` FROM `User` WHERE `username` = '%s'" %(username)
+        cursor = self.conn.cursor()
+        cursor.execute(sql)
+        ps = cursor.fetchall()
+        cursor.close()
+        lst = [x for x, in ps]
+        return lst
 
     # def search_by_uid
     # def search(self, table, which, where='', name=''):
@@ -156,4 +168,3 @@ class Room:
         self.conn.commit()
         return 1
 
-        
