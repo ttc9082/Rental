@@ -113,13 +113,19 @@ class new:
     def GET(self):
         message = web.input(message=None).message
         bucket = None
+        des = web.input(des=0).des
+        price = web.input(prise=0).prise
+        status = web.input(status=1).status
         postname = web.input(postname=None).postname
-        return render.new(message, postname, bucket)
+        return render.new(message, postname, bucket, des, price, status)
 
     def POST(self):
         S3 = AWS.AWSS3()
         postname = web.input(postname={}).postname
         alreadyHave = web.input(alreadyHave={})
+        des = web.input().des
+        price = web.input().prise
+        status = web.input().status
 
         print postname
         print alreadyHave.alreadyHave
@@ -149,11 +155,11 @@ class new:
             name = web.input().name + '.' + ext
         else:
             errors = ['name error.']
-            return render.new(errors, postname, bucket)
+            return render.new(errors, postname, bucket, des, price, status)
         s3_file = room_type + '/' + name
         saved = S3.saveFile(bucket=bucket, name=s3_file, file1=f.file2up.file)
         smessage = saved[4:] + ' has been saved!'
-        return render.new([smessage], postname, bucket)
+        return render.new([smessage], postname, bucket, des, price, status)
 
 class delete:
     def POST(self):

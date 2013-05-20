@@ -2,8 +2,8 @@ from rentaldb import *
 
 # SETUP.drop_tables()
 
-# SETUP.create_user_table()
-# SETUP.create_room_table()
+SETUP.create_user_table()
+SETUP.create_room_table()
 
 # user_data=[ "zz", "zzpassword", None, "1234", 1]
 # User.insert(user_data)

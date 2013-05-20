@@ -1,5 +1,5 @@
 import MySQLdb
-import config
+from tool import config
 
 class SETUP:
     conn = MySQLdb.connect(host = config.host, user = config.user, passwd = config.passwd, db = config.db)
