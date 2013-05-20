@@ -1,5 +1,5 @@
 import MySQLdb
-import config
+from tool import config
 
 class SETUP:
     conn = MySQLdb.connect(host = config.host, user = config.user, passwd = config.passwd, db = config.db)
@@ -68,6 +68,16 @@ class User:
         cursor.close()
         lst = [x for x, in ps]
         return lst
+
+    @classmethod 
+    def find_by_id(self, uid):
+        sql = "SELECT * FROM `User` WHERE `uid` = '%s'" % (uid)
+        cursor = self.conn.cursor()
+        cursor.execute(sql)
+        data = cursor.fetchall()
+        cursor.close()
+        return data[0]
+
 
 
 class Room:

@@ -1,0 +1,226 @@
+$def with (message, postname, bucket)
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+$if message != None:
+    $for m in message:
+        <b>$m</b>
+        <br>
+<b>//Every Line presents pictures of one kind of room .</b>
+<table border="1">
+        $if bucket:
+            <tr id='10'>
+            $for key in bucket:
+                $if key.name[0:4]=='bed/':
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    $key.name[4:]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="https://s3.amazonaws.com/$bucket.name/$key.name" width="150" height="150">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <form action="/del" method="POST">
+                                    <input type="hidden" name="bucketname" value=$bucket.name>
+                                    <input type="hidden" name="keyname" value=$key.name>
+                                    <input type="hidden" name="postname" value=$postname>
+                                    <input type="submit" value="Delete">
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+            </tr>
+            <tr id='20'>
+            $for key in bucket:
+                $if key.name[0:4]=='bat/':
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    $key.name[4:]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="https://s3.amazonaws.com/$bucket.name/$key.name" width="150" height="150">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <form action="/del" method="POST">
+                                    <input type="hidden" name="bucketname" value=$bucket.name>
+                                    <input type="hidden" name="keyname" value=$key.name>
+                                    <input type="hidden" name="postname" value=$postname>
+                                    <input type="submit" value="Delete">
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+            </tr>
+            <tr id='30'>
+            $for key in bucket:
+                $if key.name[0:4]=='din/':
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    $key.name[4:]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="https://s3.amazonaws.com/$bucket.name/$key.name" width="150" height="150">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <form action="/del" method="POST">
+                                    <input type="hidden" name="bucketname" value=$bucket.name>
+                                    <input type="hidden" name="keyname" value=$key.name>
+                                    <input type="hidden" name="postname" value=$postname>
+                                    <input type="submit" value="Delete">
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+            </tr>
+            <tr id='40'>
+            $for key in bucket:
+                $if key.name[0:4]=='kit/':
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    $key.name[4:]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="https://s3.amazonaws.com/$bucket.name/$key.name" width="150" height="150">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <form action="/del" method="POST">
+                                    <input type="hidden" name="bucketname" value=$bucket.name>
+                                    <input type="hidden" name="keyname" value=$key.name>
+                                    <input type="hidden" name="postname" value=$postname>
+                                    <input type="submit" value="Delete">
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+            </tr>
+            <tr id='50'>
+            $for key in bucket:
+                $if key.name[0:4]=='liv/':
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    $key.name[4:]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="https://s3.amazonaws.com/$bucket.name/$key.name" width="150" height="150">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <form action="/del" method="POST">
+                                    <input type="hidden" name="bucketname" value=$bucket.name>
+                                    <input type="hidden" name="keyname" value=$key.name>
+                                    <input type="hidden" name="postname" value=$postname>
+                                    <input type="submit" value="Delete">
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+            </tr>
+            <tr id='60'>
+            $for key in bucket:
+                $if key.name[0:4] == 'oth/':
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    $key.name[4:]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="https://s3.amazonaws.com/$bucket.name/$key.name" width="150" height="150">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <form action="/del" method="POST">
+                                    <input type="hidden" name="bucketname" value=$bucket.name>
+                                    <input type="hidden" name="keyname" value=$key.name>
+                                    <input type="hidden" name="postname" value=$postname>
+                                    <input type="submit" value="Delete">
+                                    </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+            </tr>
+</table>
+
+<form action="/new" enctype="multipart/form-data" method="POST">
+    <table>
+        $if postname == None:
+            <tr>
+                <td>postname :</td>
+                <td><input type='text' name="postname"></td>
+            </tr>
+        $else:
+            <tr>
+                <td>postname :</td>
+                <td>$postname</td>
+                <td><input type="hidden" name="alreadyHave" value="1"></td>
+                <td><input type="hidden" name="postname" value=$postname></td>
+            </tr>
+        <tr>
+            <td>name :</td>
+            <td><input type='text' name="name"></td>
+        </tr>
+        <tr>
+            <td>Room Type :</td>
+            <td>
+                <select name="rooms">
+                <option value="bed">Bedroom</option>
+                <option value="bat">Bathroom</option>
+                <option value="din">Dinning room</option>
+                <option value="kit">Kitchen</option>
+                <option value="liv">Living room</option>
+                <option value="oth">Other</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>file :</td>
+            <td><input type='file' name="file2up"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="upload."></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
