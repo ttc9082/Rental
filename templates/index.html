@@ -1,4 +1,4 @@
-$def with (name,rooms)
+$def with (name, titles, rid, pics)
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -40,7 +40,6 @@ $def with (name,rooms)
   </head>
 
   <body>
-    $print rooms
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -75,41 +74,24 @@ $def with (name,rooms)
 
     <div class="container-fluid">
       <div class="row-fluid">
-        
         <div class="span12">
-          <div class="row-fluid">
-              $print rooms
-              $x=0
-              $y=0
-              $firsttime=0
-              $for room in rooms:
-                  $if(firsttime==0):
-                      $firsttime=1
-                      $print firsttime
-                      <div class="row-fluid">
-                  $x+=1
-                  $y+=1
-                  $if(x%3==0):
-                      $print x
-                      </div>
-                      <div class="row-fluid">
-                  $S3 = AWS.AWSS3()
-                  $bucket = S3.get_bucket(room[6])
-                  $keyname=bucket.get_all_keys(){0}.name
-                  $url='https://s3.amazonaws.com/'+bucket+'/'+keyname
-                  <div class="span4">
-                  <h2><div style="width:600px; padding:5px">
-                  <div style="float:left; margin-right:10px"><img src="$url"/></div>
-                  </div></h2>
-                  <p>description</p>
-                  <p><a class="btn" href="#">View details &raquo;</a></p>
-                  </div><!--/span-->
-          
-          </div><!--/span-->
-      </div><!--/row-->
-
-      <hr>
-
+            $for i in range(len(rid))
+                $if i==0:
+                    <div class="row-fluid">
+                <div class="span4">
+                <h2><div style="width:600px; padding:5px">
+                <div style="float:left; margin-right:10px"><img src="$pics[i]"/></div>
+                </div></h2>
+                <p>$titles[i]</p>
+                <p><a class="btn" href="/show/$rid[i]">View details &raquo;</a></p>
+                </div><!--/span-->
+                $if i%3==2 and i< range(len(rid))
+                    </div><!--/row-fluid-->
+                    <div class="row-fluid">
+                $if i== range(len(rid))
+                    </div><!--/row-fluid-->
+                    </div><!--/span12-->
+                    </div><!--/row-fluid-->
       <footer>
         <p>&copy; Company 2013</p>
       </footer>
