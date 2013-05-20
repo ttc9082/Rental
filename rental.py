@@ -129,22 +129,12 @@ class new:
         S3 = AWS.AWSS3()
 
         uid = session.userId
-        title = web.input().tit
-        des = web.input().des
+        title = web.input().tit.strip()
+        des = web.input().des.strip()
         price = web.input().price
-        location = web.input().loc
-        status = web.input().status
+        location = web.input().loc.strip()
+        status = web.input().status.strip()
         rid = web.input().rid
-
-        print "====================="
-        print rid
-        print uid
-        print title
-        print des
-        print location
-        print price
-        print status
-        print "====================="
 
         if not rid:
             num = 0
@@ -160,10 +150,8 @@ class new:
             print room_data
             Room.insert(room_data)
             rid = Room.count_row()
-            print "---------rid---------"
-            print rid
         else:
-            bname = Room.find_by_id(rid)[7]
+            bname = Room.find_by_id(rid)[6]
 
         bucket_name = bname
         bucket = S3.get_bucket(bucket_name)

@@ -20,8 +20,11 @@ from rentaldb import *
 # print id
 
 # u=User.find_by_id(1)
-rs= Room.show_all()
-print len(rs)
-print rs
+# rs= Room.show_all()
+# print len(rs)
+# print rs
 # myroom = Room.show_my_rooms(1)
 # print myroom
+bname = Room.find_by_id(13)
+print bname
+print bname[6]
