@@ -2,7 +2,7 @@ import web
 import hashlib
 import random
 from tool import AWS
-from rentaldb import *
+#from rentaldb import *
 
 web.config.debug = False
 
