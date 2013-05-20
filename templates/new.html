@@ -32,6 +32,9 @@ $if message != None:
                                     <input type="hidden" name="bucketname" value=$bucket.name>
                                     <input type="hidden" name="keyname" value=$key.name>
                                     <input type="hidden" name="postname" value=$postname>
+                                    <input type="hidden" name="des" value=$des>
+                                    <input type="hidden" name="status" value=$status>
+                                    <input type="hidden" name="price" value=$price>
                                     <input type="submit" value="Delete">
                                     </form>
                                 </td>
@@ -60,6 +63,9 @@ $if message != None:
                                     <input type="hidden" name="bucketname" value=$bucket.name>
                                     <input type="hidden" name="keyname" value=$key.name>
                                     <input type="hidden" name="postname" value=$postname>
+                                    <input type="hidden" name="des" value=$des>
+                                    <input type="hidden" name="status" value=$status>
+                                    <input type="hidden" name="price" value=$price>
                                     <input type="submit" value="Delete">
                                     </form>
                                 </td>
@@ -88,6 +94,9 @@ $if message != None:
                                     <input type="hidden" name="bucketname" value=$bucket.name>
                                     <input type="hidden" name="keyname" value=$key.name>
                                     <input type="hidden" name="postname" value=$postname>
+                                    <input type="hidden" name="des" value=$des>
+                                    <input type="hidden" name="status" value=$status>
+                                    <input type="hidden" name="price" value=$price>
                                     <input type="submit" value="Delete">
                                     </form>
                                 </td>
@@ -116,6 +125,9 @@ $if message != None:
                                     <input type="hidden" name="bucketname" value=$bucket.name>
                                     <input type="hidden" name="keyname" value=$key.name>
                                     <input type="hidden" name="postname" value=$postname>
+                                    <input type="hidden" name="des" value=$des>
+                                    <input type="hidden" name="status" value=$status>
+                                    <input type="hidden" name="price" value=$price>
                                     <input type="submit" value="Delete">
                                     </form>
                                 </td>
@@ -144,6 +156,9 @@ $if message != None:
                                     <input type="hidden" name="bucketname" value=$bucket.name>
                                     <input type="hidden" name="keyname" value=$key.name>
                                     <input type="hidden" name="postname" value=$postname>
+                                    <input type="hidden" name="des" value=$des>
+                                    <input type="hidden" name="status" value=$status>
+                                    <input type="hidden" name="price" value=$price>
                                     <input type="submit" value="Delete">
                                     </form>
                                 </td>
@@ -172,6 +187,9 @@ $if message != None:
                                     <input type="hidden" name="bucketname" value=$bucket.name>
                                     <input type="hidden" name="keyname" value=$key.name>
                                     <input type="hidden" name="postname" value=$postname>
+                                    <input type="hidden" name="des" value=$des>
+                                    <input type="hidden" name="status" value=$status>
+                                    <input type="hidden" name="price" value=$price>
                                     <input type="submit" value="Delete">
                                     </form>
                                 </td>
@@ -198,14 +216,13 @@ $if message != None:
         </tr>
         <tr>
             <td>Description :</td>
-            <td><textarea id="edtInputWord" name ="des" rows="10" cols="20">
             $if des:
-                $des
+                <td><textarea name ="des" rows="10" cols="20">$des</textarea>
             $else:
-                Please Write description here.
-            </textarea>
+                <td><textarea name ="des" rows="10" cols="20">Please Write description here</textarea>
             </td>
         </tr>
+<<<<<<< HEAD
         <tr>
             <td>Location :</td>
             $if location:
@@ -215,14 +232,20 @@ $if message != None:
         </tr>
         <tr>
             <td>Price :</td>
+=======
+            <td>price :</td>
+>>>>>>> 58add6f679da12f7f8834655fa09a79a062ae071
             $if price:
                 <td><input type='text' name="price" VALUE=$price></td>
             $else:
                 <td><input type='text' name="price" VALUE='set price pls'></td>
+<<<<<<< HEAD
         </tr>
+=======
+>>>>>>> 58add6f679da12f7f8834655fa09a79a062ae071
         <tr>
             <td>status :</td>
-            $if status:
+            $if status=='1':
                 <td>
                     <select name="status">
                     <option value="1" selected="selected">yes</option>
