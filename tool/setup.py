@@ -12,6 +12,4 @@ from rentaldb import *
 # Room.insert(room_data)
 
 # p=User.validate_passwd("zz")
-r= Room.show_all()
-print r[0]
-print r[3]
+rs= Room.show_all()

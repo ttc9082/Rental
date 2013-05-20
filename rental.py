@@ -2,7 +2,7 @@ import web
 import hashlib
 import random
 from tool import AWS
-from tool import rentaldb
+from rentaldb import *
 
 web.config.debug = False
 
@@ -15,6 +15,7 @@ urls = (
     '/', 'index',
     '/index', 'index'
 )
+
 app = web.application(urls, locals())
 store = web.session.DiskStore('session')
 session = web.session.Session(app, store, initializer={'userName': 0, 'privilege': 0})
@@ -44,7 +45,7 @@ class login:
 
     def POST(self):
         name, passwd = web.input().user, web.input().passwd
-        userPassword = User.validate_passwd(name)
+        userPassword = User.find_passwd(name)
         try:
             if hashlib.md5(passwd).hexdigest() in userPassword:
                 session.userName = name
@@ -166,7 +167,9 @@ class delete:
 
 class index:
     def GET(self):
-        return render.index("good")
+        all_room = Room.show_all()
+
+        return render.index(all_room)
 
 
 

@@ -1,5 +1,5 @@
 import MySQLdb
-from tool import config
+import config
 
 class SETUP:
     conn = MySQLdb.connect(host = config.host, user = config.user, passwd = config.passwd, db = config.db)
@@ -57,6 +57,7 @@ class SETUP:
 
 
 class User:
+
     conn = MySQLdb.connect(host = config.host, user = config.user, passwd = config.passwd, db = config.db)
 
     @classmethod
@@ -64,15 +65,23 @@ class User:
         username, password, email, phone, privilege = value
         cursor = self.conn.cursor()
         sql = "INSERT INTO `User`(username, password, email, phone, privilege) VALUES ('%s', '%s', '%s', '%s', '%s');" % (username, password, email, phone, privilege)
+        # print sql
         try:
             cursor.execute(sql)
         except Exception,e:
             print e
+
+        # sql1 = "SELECT TABLE_ROWS FROM information_schema.tables WHERE table_name='User' AND table_schema = DATABASE();"
+        # cursor.execute(sql1)
+        # return_data = cursor.fetchall()
+        # cursor.close()
+        # self.uid = int(return_data[0][0])
+
         self.conn.commit()
         return 1
 
     @classmethod
-    def find_passwd(self, username):
+    def validate_passwd(self, username):
         sql = "SELECT `password` FROM `User` WHERE `username` = '%s'" %(username)
         cursor = self.conn.cursor()
         cursor.execute(sql)
@@ -103,15 +112,7 @@ class Room:
         cursor = self.conn.cursor()
         cursor.execute(sql)
         data = cursor.fetchall()
+        # ls = list(data)
         cursor.close()
         return data
-
-    def show_my_rooms(self, uid):
-        sql = "SELECT * FROM `Room` WHERE `uid` = '%s'" % (uid)
-        cursor = self.conn.cursor()
-        cursor.execute(sql)
-        data = cursor.fetchall()
-        cursor.close()
-        return data
-
 

@@ -1,8 +1,12 @@
-$def with (table)
+$def with (all_room)
 <html>
 <body>
 
-$table
+$for room in all_room:
+    <ul>
+        $for r in room:
+        <li>$r<li>
+    </ul>
 
 
 </body>
