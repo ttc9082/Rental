@@ -49,6 +49,7 @@ class login:
             des = []
             rid = []
             pics = []
+            owner = []
             for room in all_room:
                 titles.append(room[3])
                 des.append(room[4])
@@ -58,7 +59,9 @@ class login:
                 key = tmp_bucket.get_all_keys()
                 pic = 'https://s3.amazonaws.com/' + tmp_bucket.name + '/' + key[0].name
                 pics.append(pic)
-            return render.index(userName, titles, rid, pics)
+                temp_name = User.find_by_id(room[1])[1]
+                owner.append(temp_name)
+            return render.index(userName, titles, rid, pics, owner)
         else:
             print 'not logged in'
             return render.login()
@@ -87,6 +90,7 @@ class login:
                     des = []
                     rid = []
                     pics = []
+                    owner = []
                     for room in all_room:
                         titles.append(room[3])
                         des.append(room[4])
@@ -96,8 +100,10 @@ class login:
                         key = tmp_bucket.get_all_keys()
                         pic = 'https://s3.amazonaws.com/' + tmp_bucket.name + '/' + key[0].name
                         pics.append(pic)
+                        temp_name = User.find_by_id(room[1])[1]
+                        owner.append(temp_name)
 
-                    return render.index(userName, titles, rid, pics)
+                    return render.index(userName, titles, rid, pics, owner)
 
 
 
@@ -163,16 +169,19 @@ class sign_up:
 class new:
 
     def GET(self, id=None):
-        message = web.input(message=None).message
-        print id
-        if id == None:
-            rid, bucket, title, des, price, location, status = None, None, None, None, None, None, None
+        if logged():
+            message = web.input(message=None).message
+            print id
+            if id == None:
+                rid, bucket, title, des, price, location, status = None, None, None, None, None, None, None
+            else:
+                rid, uid, title, des, location, price, bucketname, status = Room.find_by_id(id)
+                print Room.find_by_id(id)
+                s3 = AWS.AWSS3()
+                bucket = s3.get_bucket(bucketname)
+            return render.new(message, rid, bucket, title, des, price, location, status)
         else:
-            rid, uid, title, des, location, price, bucketname, status = Room.find_by_id(id)
-            print Room.find_by_id(id)
-            s3 = AWS.AWSS3()
-            bucket = s3.get_bucket(bucketname)
-        return render.new(message, rid, bucket, title, des, price, location, status)
+            return render.login()
 
     def POST(self):
         S3 = AWS.AWSS3()
@@ -255,6 +264,7 @@ class index:
         des = []
         rid = []
         pics = []
+        owner = []
         for room in all_room:
             titles.append(room[3])
             des.append(room[4])
@@ -264,6 +274,8 @@ class index:
             key = tmp_bucket.get_all_keys()
             pic = 'https://s3.amazonaws.com/' + tmp_bucket.name + '/' + key[0].name
             pics.append(pic)
+            temp_name = User.find_by_id(room[1])[1]
+            owner.append(temp_name)
         if logged():
             userName = User.find_by_id(session.userId)[1]
         else:
@@ -272,7 +284,7 @@ class index:
         print des
         print rid
         print pics
-        return render.index(userName, titles, rid, pics)
+        return render.index(userName, titles, rid, pics, owner)
 
 
 class profile:

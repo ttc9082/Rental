@@ -1,4 +1,4 @@
-$def with (name, titles, rid, pics)
+$def with (name, titles, rid, pics, owner)
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -84,8 +84,9 @@ $def with (name, titles, rid, pics)
                 </div></h2>
                 <p>$titles[i]</p>
                 <p><a class="btn btn-success" href="/show/$rid[i]">View details &raquo;</a>
-                 <a class="btn" href="/new/$rid[i]">Edits &raquo;</a>
-                </p>
+
+                $if name == owner[i]:
+                    <a class="btn" href="/new/$rid[i]">Edits &raquo;</a></p>
                 </div><!--/span-->
                 $if i%3==2 and i< range(len(rid)):
                     </div><!--/row-fluid-->
