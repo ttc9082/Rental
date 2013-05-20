@@ -78,8 +78,12 @@ class sign_up:
     def GET(self):
         errors = web.input(errors=None)
         print errors
-        return render.sign_up(errors.errors)
-
+        name=''
+        if logged():
+            logout()
+            return render.sign_up(name,errors.errors)
+        else:
+            return render.sign_up(name,errors.errors)
     def POST(self):
         name = web.input().user 
         passwd = web.input().passwd
@@ -108,7 +112,8 @@ class sign_up:
         except:
             error_message = ['Unknown Error!']
         if error_message:
-            return render.sign_up(error_message)
+            name=''
+            return render.sign_up(name,error_message)
         else:
             return render.index('good')
 
