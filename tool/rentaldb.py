@@ -1,12 +1,10 @@
 import MySQLdb
 import config
 
-class SQL_init:
+class SETUP:
     conn = MySQLdb.connect(host = config.host, user = config.user, passwd = config.passwd, db = config.db)
 
-    def __init__(self):
-        self.conn = MySQLdb.connect(host = config.host,user = config.user, passwd = config.passwd,db = config.db)
-
+    @classmethod
     def create_user_table(self):
         # uid, username, password, email, phone, privilege (6)
         cursor = self.conn.cursor()
@@ -19,6 +17,7 @@ class SQL_init:
         self.conn.commit()
         return 1
 
+    @classmethod
     def create_room_table(self):
         # rid, uid, title, description, location, price, bucket, status (8)
         cursor = self.conn.cursor()
@@ -42,7 +41,8 @@ class SQL_init:
     #     cursor.close()
     #     self.conn.commit()
     #     return 1
-
+    
+    @classmethod
     def drop_tables(self):
         cursor = self.conn.cursor()
         sql = "DROP TABLE User; DROP TABLE Room;"
@@ -57,20 +57,12 @@ class SQL_init:
 
 
 class User:
+
     conn = MySQLdb.connect(host = config.host, user = config.user, passwd = config.passwd, db = config.db)
 
-    def __init__(self):
-        self.conn = MySQLdb.connect(host = config.host, user = config.user, passwd = config.passwd, db = config.db)
-        self.uid = 0;
-
+    @classmethod
     def insert(self, value):
-        username = value[0] or "NULL"
-        password = value[1] or "NULL"
-        email = value[2] or "NULL"
-        phone = value[3] or "NULL"
-        privilege = value[4] or "NULL"
-        # INSERT INTO table_name 
-        # VALUES (value1,value2,value3,...)
+        username, password, email, phone, privilege = value
         cursor = self.conn.cursor()
         sql = "INSERT INTO `User`(username, password, email, phone, privilege) VALUES ('%s', '%s', '%s', '%s', '%s');" % (username, password, email, phone, privilege)
         # print sql
@@ -79,11 +71,11 @@ class User:
         except Exception,e:
             print e
 
-        sql1 = "SELECT TABLE_ROWS FROM information_schema.tables WHERE table_name='User' AND table_schema = DATABASE();"
-        cursor.execute(sql1)
-        return_data = cursor.fetchall()
-        cursor.close()
-        self.uid = int(return_data[0][0])
+        # sql1 = "SELECT TABLE_ROWS FROM information_schema.tables WHERE table_name='User' AND table_schema = DATABASE();"
+        # cursor.execute(sql1)
+        # return_data = cursor.fetchall()
+        # cursor.close()
+        # self.uid = int(return_data[0][0])
 
         self.conn.commit()
         return 1
@@ -98,62 +90,16 @@ class User:
         lst = [x for x, in ps]
         return lst
 
-    # def search_by_uid
-    # def search(self, table, which, where='', name=''):
-    #     if which != '' and name != '' and where != '':
-    #         sql = "select `%s` from `%s` where `%s` = '%s'" % (which, table, where, name)
-    #     else:
-    #         sql = "select * from %s" % table
-    #     cursor = self.conn.cursor()
-    #     cursor.execute(sql)
-    #     alldata = cursor.fetchall()
-    #     cursor.close()
-    #     return alldata
-
-#     def update(self, uid, value):
-#     # UPDATE table_name
-#     # SET column1=value, column2=value2,...
-#     # WHERE some_column=some_value
-#         cursor = self.conn.cursor()
-#         sql = "UPDATE `User` SET ('%s, %s, %s, %s, %s, %s')" % (value[0], value[1], value[2], value[3], value[4], value[5])
-#         sql = "UPDATE `User` SET `%s` = '%s' WHERE `%s` = '%s'" % (table, char, value, where, name)
-#         try:
-#             cursor.execute(sql)
-#         except Exception,e:
-#             print e
-#         cursor.close()
-#         self.conn.commit()
-#         return 1
-
-    # def delete(self, uid):
-    #     # DELETE FROM table_name WHERE some_column=some_value
-    #     cursor = self.conn.cursor()
-    #     sql = "DELETE FROM `User` WHERE `uid` IN ('%s')" % (uid)
-    #     cursor.execute(sql)
-    #     cursor.close()
-    #     self.conn.commit()
-    #     return 1
-
 
 class Room:
+    conn = MySQLdb.connect(host = config.host, user = config.user, passwd = config.passwd, db = config.db)
 
-    def __init__(self):
-        self.conn = MySQLdb.connect(host = config.host, user = config.user, passwd = config.passwd, db = config.db)
-        self.rid = 0;
-
+    @classmethod
     def insert(self, value):
-        uid = value[0] or "NULL"
-        tile = value[1] or "NULL"
-        description = value[2] or "NULL"
-        location = value[3] or "NULL"
-        price = value[4] or "NULL"
-        bucket = value[5] or "NULL"
-        status = value[6] or "NULL"
-        # INSERT INTO table_name 
-        # VALUES (value1,value2,value3,...)
+        uid, title, description, location, price, bucket, status = value
         cursor = self.conn.cursor()
         sql = "INSERT INTO `Room`(uid, title, description, location, price, bucket, status) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s');" % (uid, title, description, location, price, bucket, status)
-        # print sql
+        print sql
         try:
             cursor.execute(sql)
         except Exception,e:

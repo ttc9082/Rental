@@ -1,21 +1,15 @@
 from rentaldb import *
 
-# x=SQL_init()
+SETUP.drop_tables()
 
-# x.create_user_table()
-# x.create_room_table()
+SETUP.create_user_table()
+SETUP.create_room_table()
 
-# x.drop_tables()
+user_data=[ "zz", "zzpassword", None, "1234", 1]
+User.insert(user_data)
 
-# user_data=[ "zz", "zzpassword", "zz@zz.com", "1234", 1]
-# user1= User()
-# user1.insert(user_data)
-# print user1.uid
-
-# room_data=[1, "new apartment in brooklyn", "1 bathroom, 1 bedroom", "brooklyn", "900", "bucket", 0]
-# rm1  = Room()
-# rm1.insert(room_data)
-# print rm1.rid
+room_data=[1, "new apartment in brooklyn", "1 bathroom, 1 bedroom", "brooklyn", "900", "bucket", 0]
+Room.insert(room_data)
 
 p=User.validate_passwd("zz")
 
