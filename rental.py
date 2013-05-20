@@ -10,7 +10,7 @@ urls = (
     '/login', 'login',
     '/logout', 'logout',
     '/sign_up', 'sign_up',
-    '/new', 'new',
+    '/new/(.*)', 'new',
     '/del', 'delete',
     '/', 'index',
     '/index', 'index', 
@@ -161,9 +161,16 @@ class sign_up:
 
 class new:
 
-    def GET(self):
+    def GET(self, id=None):
         message = web.input(message=None).message
-        rid, bucket, title, des, price, location, status = None, None, None, None, None, None, None
+        print id
+        if id == None:
+            rid, bucket, title, des, price, location, status = None, None, None, None, None, None, None
+        else:
+            rid, uid, title, des, location, price, bucketname, status = Room.find_by_id(id)
+            print Room.find_by_id(id)
+            s3 = AWS.AWSS3()
+            bucket = s3.get_bucket(bucketname)
         return render.new(message, rid, bucket, title, des, price, location, status)
 
     def POST(self):
