@@ -46,10 +46,8 @@ class login:
 
     def POST(self):
         name, passwd = web.input().user, web.input().passwd
-        userPassword = User.find_passwd(name)
         try:
-            flag = False
-            ps = User.validate_passwd("zz")
+            ps = User.validate_passwd(name)
             for p in ps:
                 if hashlib.md5(passwd).hexdigest() == p[0]:
                     session.userId = p[1]
