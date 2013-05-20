@@ -36,13 +36,6 @@ def cellphonecheck(number):
 def validName(name):
     return True
 
-class index:
-    def GET(self):
-        ss='123'
-        if not ss.strip():
-            print 'ss is null'
-        return render.index(ss)
-
 class login:
     def GET(self):
         if logged():

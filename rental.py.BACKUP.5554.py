@@ -12,7 +12,10 @@ urls = (
     '/sign_up', 'sign_up',
     '/new', 'new',
     '/del', 'delete',
+<<<<<<< HEAD
+=======
     '/', 'index',
+>>>>>>> 718d46fec98cf97f4c222405423b99decee1dc1a
     '/index', 'index'
 )
 
@@ -36,6 +39,7 @@ def cellphonecheck(number):
 def validName(name):
     return True
 
+<<<<<<< HEAD
 class index:
     def GET(self):
         ss='123'
@@ -43,6 +47,8 @@ class index:
             print 'ss is null'
         return render.index(ss)
 
+=======
+>>>>>>> 718d46fec98cf97f4c222405423b99decee1dc1a
 class login:
     def GET(self):
         if logged():

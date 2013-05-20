@@ -2,20 +2,17 @@ import web
 import hashlib
 import random
 from tool import AWS
-from rentaldb import *
 
 web.config.debug = False
 
 urls = (
     '/login', 'login',
-    '/logout', 'logout',
-    '/sign_up', 'sign_up',
+    '/reset', 'reset',
+    '/sign_in', 'sign_in',
     '/new', 'new',
     '/del', 'delete',
-    '/', 'index',
     '/index', 'index'
 )
-
 app = web.application(urls, locals())
 store = web.session.DiskStore('session')
 session = web.session.Session(app, store, initializer={'userName': 0, 'privilege': 0})
@@ -52,9 +49,9 @@ class login:
 
     def POST(self):
         name, passwd = web.input().user, web.input().passwd
-        userPassword = User.find_passwd(name)
+        userPassword = '07f793d559d19bba6263b082cf20703d' # check password by name in DB (encoded in MD5)
         try:
-            if hashlib.md5(passwd).hexdigest() in userPassword:
+            if hashlib.md5(passwd).hexdigest() == userPassword:
                 session.userName = name
                 privilege = 1 # check privilege by name in DB
                 session.privilege = privilege
@@ -69,7 +66,7 @@ class login:
             return render.login_error()
 
 
-class logout:
+class reset:
     def GET(self):
         name = session.userName
         session.userName = 0
@@ -77,23 +74,21 @@ class logout:
         return render.logout(name)
 
 
-class sign_up:
+class sign_in:
     def GET(self):
         errors = web.input(errors=None)
         print errors
-        return render.sign_up(errors.errors)
+        return render.sign_in(errors.errors)
 
     def POST(self):
-        name = web.input().user 
+        name = web.input().user
         passwd = web.input().passwd
-        passwdconf = web.input().passwdconf 
-        encrypted_password = hashlib.md5(passwd).hexdigest()
-        emailadd = web.input().email 
-        emailaddconf = web.input().emailconf 
-        cellphone = web.input().cellphone 
+        passwdconf = web.input().passwdconf
+        emailadd = web.input().email
+        emailaddconf = web.input().emailconf
+        cellphone = web.input().cellphone
         privilege = 1
-        user_data = [name, encrypted_password, emailadd, cellphone, privilege]
-        User.insert(user_data)
+        # write these in DB here.
         error_message = []
         try:
             if passwd != passwdconf:
@@ -111,18 +106,16 @@ class sign_up:
         except:
             error_message = ['Unknown Error!']
         if error_message:
-            return render.sign_up(error_message)
+            return render.sign_in(error_message)
         else:
             return render.index('good')
 
 class new:
-
     def GET(self):
         message = web.input(message=None).message
         bucket = None
         postname = web.input(postname=None).postname
         return render.new(message, postname, bucket)
-
     def POST(self):
         S3 = AWS.AWSS3()
         postname = web.input(postname={}).postname
@@ -170,16 +163,6 @@ class delete:
         S3.delFile(x.keyname, x.bucketname)
         message = x.keyname + ' is Deleted'
         return render.new([message], x.postname, bucket)
-
-
-class index:
-    def GET(self):
-        all_room = Room.show_all()
-
-        return render.index(all_room)
-
-
-
 
 
 
