@@ -1,0 +1,46 @@
+$def with (errors)
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+$if errors:
+    $for error in errors:
+        <b>$error</b>
+        <br>
+$else:
+    $pass
+<form action="/sign_in" method="POST">
+    <table id="login">
+        <tr>
+            <td>User: </td>
+            <td><input type="text" name="user"></td>
+        </tr>
+        <tr>
+            <td>Password: </td>
+            <td><input type="password" name="passwd"></td>
+        </tr>
+        <tr>
+            <td>Password: </td>
+            <td><input type="password" name="passwdconf"></td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td><input type="email" name="email"></td>
+        </tr>
+        <tr>
+            <td>Email Confirmation: </td>
+            <td><input type="email" name="emailconf"></td>
+        </tr>
+        <tr>
+            <td>cellphone: </td>
+            <td><input type='tel' name="cellphone"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Sign in!"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
