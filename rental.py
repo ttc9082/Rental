@@ -48,18 +48,17 @@ class login:
 
     def POST(self):
         name, passwd = web.input().user, web.input().passwd
+        print name, passwd
         try:
             ps = User.validate_passwd(name)
+            print ps
             for p in ps:
                 if hashlib.md5(passwd).hexdigest() == p[0]:
                     session.userId = p[1]
                     privilege = 1 # check privilege by name in DB
                     session.privilege = privilege
                     userName = User.find_by_id(session.userId)[1]
-                    return render.login_ok(userName)
-            session.userId = 0
-            session.privilege = 0
-            return render.login_error()
+                    return render.index(userName)
         except:
             session.userId = 0
             session.privilege = 0
@@ -69,9 +68,10 @@ class login:
 class logout:
     def GET(self):
         uid = session.userId
+        userName = User.find_by_id(session.userId)[1]
         session.userId = 0
         session.kill()
-        return render.logout(uid)
+        return render.logout(userName)
 
 
 class sign_up:
@@ -115,7 +115,7 @@ class sign_up:
             name=''
             return render.sign_up(name, error_message)
         else:
-            return render.index()
+            return render.login()
 
 
 class new:
@@ -200,7 +200,11 @@ class index:
         if not logged():
             print 'not logged in'
         all_room = Room.show_all()
-        return render.index('123')
+        if logged():
+            userName = User.find_by_id(session.userId)
+        else:
+            userName = ''
+        return render.index(userName)
 
 
 class profile:

@@ -1,9 +1,10 @@
 from rentaldb import *
 
+
 # SETUP.drop_tables()
 
-SETUP.create_user_table()
-SETUP.create_room_table()
+# SETUP.create_user_table()
+# SETUP.create_room_table()
 
 # user_data=[ "zz", "foobar", None, "1234", 1]
 # User.insert(user_data)
@@ -19,7 +20,8 @@ SETUP.create_room_table()
 # print id
 
 # u=User.find_by_id(1)
-# rs= Room.show_all()
-# print len(rs)
+rs= Room.show_all()
+print len(rs)
+print rs
 # myroom = Room.show_my_rooms(1)
 # print myroom

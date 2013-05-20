@@ -1,4 +1,3 @@
-$def with (errors)
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,7 +29,7 @@ $def with (errors)
       }
       
       .form-signin {
-        	max-width: 800px;
+        	max-width: 1200px;
 	        padding: 19px 29px 29px;
 	        margin: auto auto 20px;
 	        background-color: #fff;
@@ -63,7 +62,7 @@ $def with (errors)
     <![endif]-->
 
     <!-- Fav and touch icons -->
-    <script src="js/holder.js"></script>
+    <script src="../static/js/holder.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
   </head>
@@ -76,9 +75,18 @@ $def with (errors)
           <a class="brand" href="#">Room Rental</a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
-              <a href="#" class="navbar-link">Sign in</a>
-              or
-              <a href="#" class="navbar-link">Log in</a>
+            $if not name.strip():
+	        	<p class="navbar-text pull-right">
+	            <a href="#" class="navbar-link">Sign up</a>
+	          	or
+	            <a href="#" class="navbar-link">Log in</a>
+	            </p>
+            $else:
+	            <p class="navbar-text pull-right">
+	            $name
+	            or
+	            <a href="#" class="navbar-link">Log out</a>
+	            </p>
             </p>
             <ul class="nav">
               <li><a href="#">New</a></li>
@@ -96,54 +104,7 @@ $def with (errors)
     </div>
  	<div class="container">
 
-      	<form class="form-signin">
-        	<h2 class="form-signin-heading">Sign up for our website!</h2>
-        	$if errors:
-			    $for error in errors:
-			        <i class="icon-remove"></i>$error
-			        <br>
-			$else:
-			    $pass
-        	<input type="text" class="input-block-level" placeholder="Username">
-        	<input type="password" class="input-block-level" placeholder="Password">
-        	<input type="password" class="input-block-level" placeholder="Re-enter Password">
-        	<input type="text" class="input-block-level" placeholder="Your Email">
-        	<input type="text" class="input-block-level" placeholder="Re-enter Email">
-        	<input type="text" class="input-block-level" placeholder="Cellphone number">
-       		
-        	<p>
-        		<!-- Button to trigger modal -->
-        		<a href="#myModal" role="button" class="btn btn-large btn-success" data-toggle="modal">Sign up</a>
-        		<a href="#myModal1" role="button" class="btn btn-large" data-toggle="modal">Cancel</a>
-        	</p>
-			<!-- Modal -->
-			<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-header">
-			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			    <h3 id="myModalLabel">Attention</h3>
-			  </div>
-			  <div class="modal-body">
-			    <p>Are you sure to save these informations?</p>
-			  </div>
-			  <div class="modal-footer">
-			  	<button class="btn btn-primary btn-success" type = "submit">Yes</button>
-			    <button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
-			  </div>
-			</div>
-			<div id="myModal1" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-header">
-			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			    <h3 id="myModalLabel">Attention</h3>
-			  </div>
-			  <div class="modal-body">
-			    <p>Are you sure to quit?</p>
-			  </div>
-			  <div class="modal-footer">
-			  	<button class="btn btn-primary btn-success">Yes</button>
-			    <button class="btn" data-dismiss="modal" aria-hidden="true">No</button>
-			  </div>
-			</div>
-      	</form>
+      	
 
     </div> <!-- /container -
 
