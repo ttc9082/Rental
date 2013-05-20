@@ -11,6 +11,7 @@ urls = (
     '/logout', 'logout',
     '/sign_up', 'sign_up',
     '/new/(.*)', 'new',
+    '/new', 'new',
     '/del', 'delete',
     '/', 'index',
     '/index', 'index', 
