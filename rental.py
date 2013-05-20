@@ -178,7 +178,7 @@ class delete:
         bucket = S3.get_bucket(x.bucketname)
         S3.delFile(x.keyname, x.bucketname)
         message = x.keyname + ' is Deleted'
-        return render.new([message], x.rid, bucket, x.title, x.des, x.price, x.location, x.status)
+        return render.new([message], x.rid, bucket, x.tit, x.des, x.price, x.location, x.status)
 
 class show:
     def GET(self, rid):
