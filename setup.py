@@ -12,7 +12,7 @@ from rentaldb import *
 # Room.insert(room_data)
 
 # p=User.validate_passwd("zz")
-rs= Room.show_all()
-print rs
+# rs= Room.show_all()
+# print len(rs)
 # myroom = Room.show_my_rooms(1)
 # print myroom

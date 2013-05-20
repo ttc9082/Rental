@@ -93,6 +93,7 @@ class Room:
         data = cursor.fetchall()
         cursor.close()
         return data
+ 
 
     @classmethod
     def show_my_rooms(self, uid):
