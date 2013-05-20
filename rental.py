@@ -2,7 +2,7 @@ import web
 import hashlib
 import random
 from tool import AWS
-#from rentaldb import *
+from rentaldb import *
 
 web.config.debug = False
 
@@ -57,7 +57,30 @@ class login:
                     privilege = 1 # check privilege by name in DB
                     session.privilege = privilege
                     userName = User.find_by_id(session.userId)[1]
-                    return render.index(userName)
+
+
+                    if not logged():
+                        print 'not logged in'
+                    all_room = Room.show_all()
+                    print all_room
+                    titles = []
+                    des = []
+                    rid = []
+                    pics = []
+                    for room in all_room:
+                        titles.append(room[3])
+                        des.append(room[4])
+                        rid.append(room[0])
+                        s3 = AWS.AWSS3()
+                        tmp_bucket = s3.get_bucket(room[6])
+                        key = tmp_bucket.get_all_keys()
+                        pic = 'https://s3.amazonaws.com/' + tmp_bucket.name + '/' + key[0].name
+                        pics.append(pic)
+
+                    return render.index(userName, titles, rid, pics)
+
+
+
         except:
             session.userId = 0
             session.privilege = 0

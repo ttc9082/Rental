@@ -43,9 +43,9 @@ $def with (name, titles, rid, pics)
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
-          <a class="brand" href="#">Room Rental</a>
+          <a class="brand" href="/">Room Rental</a>
           <div class="nav-collapse collapse">
-          	$if not name.strip():
+          	$if not name:
 	            <p class="navbar-text pull-right">
 	            <a href="/sign_up" class="navbar-link">Sign up</a>
 	            or
@@ -80,22 +80,22 @@ $def with (name, titles, rid, pics)
                     <div class="row-fluid">
                 <div class="span4">
                 <h2><div style="width:600px; padding:5px">
-                <div style="float:left; margin-right:10px"><img src="$pics[i]"/></div>
+                <div style="float:left; margin-right:10px"><img src="$pics[i]" width="350" height="300"/></div>
                 </div></h2>
                 <p>$titles[i]</p>
                 <p><a class="btn" href="/show/$rid[i]">View details &raquo;</a></p>
                 </div><!--/span-->
-                $if i%3==2 and i< range(len(rid))
+                $if i%3==2 and i< range(len(rid)):
                     </div><!--/row-fluid-->
                     <div class="row-fluid">
-                $if i== range(len(rid))
+                $if i== range(len(rid)):
                     </div><!--/row-fluid-->
                     </div><!--/span12-->
                     </div><!--/row-fluid-->
-      <footer>
+<!--       <footer>
         <p>&copy; Company 2013</p>
       </footer>
-
+ -->
     </div><!--/.fluid-container-->
 
     
