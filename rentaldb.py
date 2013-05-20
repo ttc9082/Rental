@@ -95,6 +95,14 @@ class Room:
         return 1
 
     @classmethod
+    def count_row(self):
+        sql1 = "SELECT TABLE_ROWS FROM information_schema.tables WHERE table_name='Room' AND table_schema = DATABASE();"
+        cursor.execute(sql1)
+        return_data = cursor.fetchall()
+        cursor.close()
+        return return_data[0][0]
+
+    @classmethod
     def show_all(self):
         sql = "SELECT * FROM `Room`;"
         cursor = self.conn.cursor()
@@ -113,3 +121,11 @@ class Room:
         cursor.close()
         return data
 
+    @classmethod
+    def find_by_id(self, rid):
+        sql = "SELECT * FROM `Room` WHERE `rid` = '%s'" % (rid)
+        cursor = self.conn.cursor()
+        cursor.execute(sql)
+        data = cursor.fetchall()
+        cursor.close()
+        return data[0]

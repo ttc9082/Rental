@@ -1,4 +1,4 @@
-$def with (message, postname, bucket, des, price, status)
+$def with (message, rid, bucket, title, des, price, location, status)
 <html>
 <head>
     <title></title>
@@ -183,18 +183,19 @@ $if message != None:
 
 <form action="/new" enctype="multipart/form-data" method="POST">
     <table>
-        $if postname == None:
-            <tr>
-                <td>postname :</td>
-                <td><input type='text' name="postname"></td>
-            </tr>
-        $else:
-            <tr>
-                <td>postname :</td>
-                <td>$postname</td>
-                <td><input type="hidden" name="alreadyHave" value="1"></td>
-                <td><input type="hidden" name="postname" value=$postname></td>
-            </tr>
+        $if rid != None:
+             <input type="hidden" name="alreadyHave" value="1">
+
+        <tr>
+            <td>Title :</td>
+            <td><textarea id="title" name ="tit" rows="10" cols="20">
+            $if title:
+                $title
+            $else:
+                Please Write title here.
+            </textarea>
+            </td>
+        </tr>
         <tr>
             <td>Description :</td>
             <td><textarea id="edtInputWord" name ="des" rows="10" cols="20">
@@ -205,11 +206,20 @@ $if message != None:
             </textarea>
             </td>
         </tr>
-            <td>Prise :</td>
-            $if price:
-                <td><input type='text' name="prise" VALUE=$price></td>
+        <tr>
+            <td>Location :</td>
+            $if location:
+                <td><input type='text' name="loc" VALUE=$location></td>
             $else:
-                <td><input type='text' name="prise" VALUE='set price pls'></td>
+                <td><input type='text' name="loc" VALUE='set location pls'></td>
+        </tr>
+        <tr>
+            <td>Price :</td>
+            $if price:
+                <td><input type='text' name="price" VALUE=$price></td>
+            $else:
+                <td><input type='text' name="price" VALUE='set price pls'></td>
+        </tr>
         <tr>
             <td>status :</td>
             $if status:

@@ -14,7 +14,7 @@ urls = (
     '/del', 'delete',
     '/', 'index',
     '/index', 'index', 
-    '/profile/(.*)', 'show'
+    '/profile/(.*)', 'profile'
 )
 
 app = web.application(urls, locals())
@@ -35,6 +35,7 @@ def cellphonecheck(number):
 
 def validName(name):
     return True
+
 
 class login:
     def GET(self):
@@ -110,6 +111,7 @@ class sign_up:
         else:
             return render.index('good')
 
+
 class new:
 
     def GET(self):
@@ -123,30 +125,34 @@ class new:
 
     def POST(self):
         S3 = AWS.AWSS3()
-        postname = web.input(postname={}).postname
         alreadyHave = web.input(alreadyHave={})
+        uid = session.userId
+        title = web.input.tit
         des = web.input().des
-        price = web.input().prise
+        price = web.input().price
+        location = web.input().loc
         status = web.input().status
+        rid = web.input().rid
 
-        print postname
-        print alreadyHave.alreadyHave
+        print rid
 
-        if not alreadyHave.alreadyHave:
+        if not rid:
             num = 0
             while num < 10:
                 try:
-                    name = 'rental_id_' + str(random.randint(1000, 9999))
+                    bname = 'rental_id_' + str(random.randint(1000, 9999))
                     S3.create_bucket(name)
                     break
                 except:
                     num += 1
                     pass
-            # build a relationship between this bucket's name and the post's name here.
+            room_data = [uid, title, des, loc, price, bname, 0]
+            Room.insert(room_data)
+            rid = Room.count_row()
+        else:
+            bname = Room.find_by_id(rid)[7]
 
-
-        #find bucket name in the table with the postname
-        bucket_name = 'rental_id_7547'
+        bucket_name = bname
         bucket = S3.get_bucket(bucket_name)
         f = web.input(file2up={})
         room_type = web.input().rooms
@@ -162,6 +168,7 @@ class new:
         saved = S3.saveFile(bucket=bucket, name=s3_file, file1=f.file2up.file)
         smessage = saved[4:] + ' has been saved!'
         return render.new([smessage], postname, bucket, des, price, status)
+
 
 class delete:
     def POST(self):

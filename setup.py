@@ -11,12 +11,12 @@ SETUP.create_room_table()
 # room_data=[1, "new apartment in brooklyn", "1 bathroom, 1 bedroom", "brooklyn", "900", "bucket", 0]
 # Room.insert(room_data)
 
-ps=User.validate_passwd("zz")
-my="z"
-for p in ps:
-    if my==p[0]:
-        id = p[1]
-print id
+# ps=User.validate_passwd("zz")
+# my="z"
+# for p in ps:
+#     if my==p[0]:
+#         id = p[1]
+# print id
 
 # u=User.find_by_id(1)
 # rs= Room.show_all()
