@@ -51,7 +51,6 @@ class login:
         print name, passwd
         try:
             ps = User.validate_passwd(name)
-            print ps
             for p in ps:
                 if hashlib.md5(passwd).hexdigest() == p[0]:
                     session.userId = p[1]
@@ -133,7 +132,7 @@ class new:
         des = web.input().des.strip()
         price = web.input().price
         location = web.input().loc.strip()
-        status = web.input().status.strip()
+        status = web.input().status
         rid = web.input().rid
 
         if not rid:
