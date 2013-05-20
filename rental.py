@@ -149,7 +149,7 @@ class new:
             room_data = [uid, title, des, location, price, bname, 0]
             print room_data
             Room.insert(room_data)
-            rid = Room.count_row()
+            rid = Room.find_my_id(bname)
         else:
             bname = Room.find_by_id(rid)[6]
 

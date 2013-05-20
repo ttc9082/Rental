@@ -95,6 +95,16 @@ class Room:
         return 1
 
     @classmethod
+    def find_my_id(self, bname):
+        sql1 = "SELECT `rid` FROM `Room` WHERE `bucket` = '%s'" % (bname)
+        cursor = self.conn.cursor()
+        cursor.execute(sql1)
+        return_data = cursor.fetchall()
+        cursor.close()
+        return return_data[0][0]
+
+
+    @classmethod
     def count_row(self):
         sql1 = "SELECT TABLE_ROWS FROM information_schema.tables WHERE table_name='Room' AND table_schema = DATABASE();"
         cursor = self.conn.cursor()
