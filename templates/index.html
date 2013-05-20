@@ -9,7 +9,7 @@ $def with (name, titles, rid, pics)
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link type="text/css" href="../static/css/bootstrap.css" rel="stylesheet">
+    <link type="text/css" href="static/css/bootstrap.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -28,7 +28,7 @@ $def with (name, titles, rid, pics)
         }
       }
     </style>
-    <link type="text/javascript" href="../static/css/bootstrap-responsive.css" rel="stylesheet">
+    <link type="text/javascript" href="static/css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -36,7 +36,7 @@ $def with (name, titles, rid, pics)
     <![endif]-->
 
     <!-- Fav and touch icons -->
-    <script src="../static/js/holder.js"></script>
+    <script src="static/js/holder.js"></script>
   </head>
 
   <body>
@@ -75,15 +75,25 @@ $def with (name, titles, rid, pics)
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span12">
-            $for i in range(len(rid)):
-                <div class="row-fluid">
+            $for i in range(len(rid))
+                $if i==0:
+                    <div class="row-fluid">
                 <div class="span4">
                 <h2><div style="width:600px; padding:5px">
-                <div style="float:left; margin-right:10px"><img src="$pics[i]" width="350" height="300"/></div>
+                <div style="float:left; margin-right:10px"><img src="$pics[i]" width="300" height="150"/></div>
                 </div></h2>
                 <p>$titles[i]</p>
-                <p><a class="btn" href="/show/$rid[i]">View details &raquo;</a></p>
+                <p><a class="btn btn-success" href="/show/$rid[i]">View details &raquo;</a>
+                <a class="btn" href="/new">Edit &raquo;</a>
+                </p>
                 </div><!--/span-->
+                $if i%3==2 and i< range(len(rid)):
+                    </div><!--/row-fluid-->
+                    <div class="row-fluid">
+                $if i== range(len(rid)):
+                    </div><!--/row-fluid-->
+                    </div><!--/span12-->
+                    </div><!--/row-fluid-->
 <!--       <footer>
         <p>&copy; Company 2013</p>
       </footer>

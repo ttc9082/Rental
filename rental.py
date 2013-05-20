@@ -170,10 +170,10 @@ class new:
         S3 = AWS.AWSS3()
 
         uid = session.userId
-        title = web.input().tit.strip()
-        des = web.input().des.strip()
+        title = web.input().tit
+        des = web.input().des
         price = web.input().price
-        location = web.input().loc.strip()
+        location = web.input().loc
         status = web.input().status
         rid = web.input().rid
 
