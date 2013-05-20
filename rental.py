@@ -113,9 +113,9 @@ class sign_up:
             error_message = ['Unknown Error!']
         if error_message:
             name=''
-            return render.sign_up(name,error_message)
+            return render.sign_up(name, error_message)
         else:
-            return render.index('good')
+            return render.index()
 
 
 class new:
