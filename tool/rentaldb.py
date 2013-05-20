@@ -41,7 +41,7 @@ class SETUP:
     #     cursor.close()
     #     self.conn.commit()
     #     return 1
-    
+
     @classmethod
     def drop_tables(self):
         cursor = self.conn.cursor()
@@ -99,18 +99,20 @@ class Room:
         uid, title, description, location, price, bucket, status = value
         cursor = self.conn.cursor()
         sql = "INSERT INTO `Room`(uid, title, description, location, price, bucket, status) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s');" % (uid, title, description, location, price, bucket, status)
-        print sql
         try:
             cursor.execute(sql)
         except Exception,e:
             print e
-
-        sql1 = "SELECT TABLE_ROWS FROM information_schema.tables WHERE table_name='User' AND table_schema = DATABASE();"
-        cursor.execute(sql1)
-        return_data = cursor.fetchall()
-        cursor.close()
-        self.rid = int(return_data[0][0])
-
         self.conn.commit()
         return 1
+
+    @classmethod
+    def show_all(self):
+        sql = "SELECT * FROM `Room`;"
+        cursor = self.conn.cursor()
+        cursor.execute(sql)
+        data = cursor.fetchall()
+        ls = list(data)
+        cursor.close()
+        return ls
 

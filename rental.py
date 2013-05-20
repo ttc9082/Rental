@@ -8,10 +8,12 @@ web.config.debug = False
 
 urls = (
     '/login', 'login',
-    '/reset', 'reset',
+    '/logout', 'logout',
     '/sign_up', 'sign_up',
     '/new', 'new',
-    '/del', 'delete'
+    '/del', 'delete',
+    '/', 'index',
+    '/index', 'index'
 )
 app = web.application(urls, locals())
 store = web.session.DiskStore('session')
@@ -59,7 +61,7 @@ class login:
             return render.login_error()
 
 
-class reset:
+class logout:
     def GET(self):
         name = session.userName
         session.userName = 0
@@ -74,14 +76,16 @@ class sign_up:
         return render.sign_up(errors.errors)
 
     def POST(self):
-        name = web.input().user
+        name = web.input().user 
         passwd = web.input().passwd
-        passwdconf = web.input().passwdconf
-        emailadd = web.input().email
-        emailaddconf = web.input().emailconf
-        cellphone = web.input().cellphone
+        passwdconf = web.input().passwdconf 
+        encrypted_password = hashlib.md5(passwd).hexdigest()
+        emailadd = web.input().email 
+        emailaddconf = web.input().emailconf 
+        cellphone = web.input().cellphone 
         privilege = 1
-        # write these in DB here.
+        user_data = [name, encrypted_password, emailadd, cellphone, privilege]
+        User.insert(user_data)
         error_message = []
         try:
             if passwd != passwdconf:
@@ -104,11 +108,13 @@ class sign_up:
             return render.index('good')
 
 class new:
+
     def GET(self):
         message = web.input(message=None).message
         bucket = None
         postname = web.input(postname=None).postname
         return render.new(message, postname, bucket)
+
     def POST(self):
         S3 = AWS.AWSS3()
         postname = web.input(postname={}).postname
@@ -156,6 +162,14 @@ class delete:
         S3.delFile(x.keyname, x.bucketname)
         message = x.keyname + ' is Deleted'
         return render.new([message], x.postname, bucket)
+
+
+class index:
+    def GET(self):
+        return render.index("good")
+
+
+
 
 
 
