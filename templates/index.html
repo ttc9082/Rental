@@ -48,14 +48,15 @@ $def with (name)
           <div class="nav-collapse collapse">
           	$if not name.strip():
 	            <p class="navbar-text pull-right">
-	            <a href="#" class="navbar-link">Sign up</a>
+	            <a href="/sign_up" class="navbar-link">Sign up</a>
 	            or
-	            <a href="#" class="navbar-link">Log in</a>
+	            <a href="/login" class="navbar-link">Log in</a>
 	            </p>
             $else:
 	            <p class="navbar-text pull-right">
 	            $name
-	            <a href="#" class="navbar-link">Log out</a>
+	            <a href="/logout" class="navbar-link">Log out</a>
+
 	            </p>
             <ul class="nav">
             <li><a href="#">New</a></li>
@@ -77,6 +78,7 @@ $def with (name)
         
         <div class="span12">
           <div class="row-fluid">
+            $
             <div class="span4">
             	<h2><div style="width:600px; padding:5px">
 					<div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
@@ -84,66 +86,7 @@ $def with (name)
 				<p>description</p>
               <p><a class="btn" href="#">View details &raquo;</a></p>
             </div><!--/span-->
-            <div class="span4">
-            	<h2><div style="width:600px; padding:5px">
-					<div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
-				</div></h2>
-				<p>description</p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="span4">
-            	<h2><div style="width:600px; padding:5px">
-					<div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
-				</div></h2>
-				<p>description</p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-          </div><!--/row-->
-          <div class="row-fluid">
-            <div class="span4">
-            	<h2><div style="width:600px; padding:5px">
-					<div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
-				</div></h2>
-				<p>description</p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="span4">
-            	<h2><div style="width:600px; padding:5px">
-					<div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
-				</div></h2>
-				<p>description</p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="span4">
-            	<h2><div style="width:600px; padding:5px">
-					<div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
-				</div></h2>
-				<p>description</p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-          </div><!--/row-->
-          <div class="row-fluid">
-            <div class="span4">
-            	<h2><div style="width:600px; padding:5px">
-					<div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
-				</div></h2>
-				<p>description</p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="span4">
-            	<h2><div style="width:600px; padding:5px">
-					<div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
-				</div></h2>
-				<p>description</p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
-            <div class="span4">
-            	<h2><div style="width:600px; padding:5px">
-					<div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
-				</div></h2>
-				<p>description</p>
-              <p><a class="btn" href="#">View details &raquo;</a></p>
-            </div><!--/span-->
+
           </div><!--/row-->
           
         </div><!--/span-->
