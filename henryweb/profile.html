@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome to our room Rental</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <script src="js/holder.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="#">Room Rental</a>
+          <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">
+              <a href="#" class="navbar-link">Sign in</a>
+              or
+              <a href="#" class="navbar-link">Log in</a>
+            </p>
+            <ul class="nav">
+              <li><a href="#">New</a></li>
+              <li><a href="#">ALL</a></li>
+              <li><a href="#about">Profile</a></li>
+              <li>
+              	<form class="navbar-search">
+  			  		<input type="text" class="search-query" placeholder="Search">
+			  	</form>
+              </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Personal information</li>
+              <table class="table table-bordered">
+              	<tr>
+              		<td>Username</td> 
+              		<td>name from db</td> 
+              	<tr>	
+              	<tr>
+              		<td>Email</td> 
+              		<td>email from db</td> 
+              	</tr>
+              	<tr>
+              		<td>Cellphone</td> 
+              		<td>cellphone from db</td> 
+              	</tr>
+              	<tr>
+              		<td>room rental numbers</td> 
+              		<td>numbers from db</td> 
+              	</tr>
+              </table>
+              <a href="#myModal" role="button" class="btn btn-large btn-block btn-success" data-toggle="modal">Edit</a>
+            </ul>    
+          </div><!--/.well -->
+			  <!-- Modal -->
+			<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			    <h3 id="myModalLabel">Modified</h3>
+			  </div>
+			  <div class="modal-body">
+			    <form class="form-signin">
+		        	<h2 class="form-signin-heading">Personal information</h2>
+		        	<input type="text" class="input-block-level" placeholder="Username">
+		        	<input type="password" class="input-block-level" placeholder="Password">
+		        	<input type="password" class="input-block-level" placeholder="Re-enter Password">
+		        	<input type="text" class="input-block-level" placeholder="Your Email">
+		        	<input type="text" class="input-block-level" placeholder="Cellphone Number">
+		        	</form>
+			  </div>
+			  <div class="modal-footer">
+			  	<input type="button" class="btn btn-primary btn-success">
+			  	<button class="btn btn-primary btn-success">Save changes</button>
+			    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+			  </div>
+			</div>
+        </div><!--/span-->
+        <div class="span9">
+          <div class="row-fluid">
+            <div class="span4">
+            	<h2><div style="width:600px; padding:5px">
+					<div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
+				</div></h2>
+				<p>description</p>
+              <p>
+              		<a class="btn" href="#">View details &raquo;</a>
+              		<a class="btn btn-success" href="#">Edit &raquo;</a>
+              </p>
+            </div><!--/span-->
+            <div class="span4">
+            	<h2><div style="width:600px; padding:5px">
+					<div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
+				</div></h2>
+				<p>description</p>
+              <p>
+              		<a class="btn" href="#">View details &raquo;</a>
+              		<a class="btn btn-success" href="#">Edit &raquo;</a>
+              </p>
+            </div><!--/span-->
+            <div class="span4">
+            	<h2><div style="width:600px; padding:5px">
+					<div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
+				</div></h2>
+				<p>description</p>
+              <p>
+              		<a class="btn" href="#">View details &raquo;</a>
+              		<a class="btn btn-success" href="#">Edit &raquo;</a>
+              </p>
+            </div><!--/span-->
+          </div><!--/row-->
+          <div class="row-fluid">
+            <div class="span4">
+            	<h2><div style="width:600px; padding:5px">
+					<div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
+				</div></h2>
+				<p>description</p>
+              <p>
+              		<a class="btn" href="#">View details &raquo;</a>
+              		<a class="btn btn-success" href="#">Edit &raquo;</a>
+              </p>
+            </div><!--/span-->
+            <div class="span4">
+            	<h2><div style="width:600px; padding:5px">
+					<div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
+				</div></h2>
+				<p>description</p>
+              <p>
+              		<a class="btn" href="#">View details &raquo;</a>
+              		<a class="btn btn-success" href="#">Edit &raquo;</a>
+              </p>
+            </div><!--/span-->
+            <div class="span4">
+            	<h2><div style="width:600px; padding:5px">
+					<div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
+				</div></h2>
+				<p>description</p>
+             <p>
+              		<a class="btn" href="#">View details &raquo;</a>
+              		<a class="btn btn-success" href="#">Edit &raquo;</a>
+              </p>
+            </div><!--/span-->
+          </div><!--/row-->
+          <div class="row-fluid">
+            <div class="span4">
+            	<h2><div style="width:600px; padding:5px">
+					<div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
+				</div></h2>
+				<p>description</p>
+              <p>
+              		<a class="btn" href="#">View details &raquo;</a>
+              		<a class="btn btn-success" href="#">Edit &raquo;</a>
+              </p>
+            </div><!--/span-->
+            <div class="span4">
+            	<h2><div style="width:600px; padding:5px">
+					<div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
+				</div></h2>
+				<p>description</p>
+              <p>
+              		<a class="btn" href="#">View details &raquo;</a>
+              		<a class="btn btn-success" href="#">Edit &raquo;</a>
+              </p>
+            </div><!--/span-->
+            <div class="span4">
+            	<h2><div style="width:600px; padding:5px">
+					<div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
+				</div></h2>
+				<p>description</p>
+              <p>
+              		<a class="btn" href="#">View details &raquo;</a>
+              		<a class="btn btn-success" href="#">Edit &raquo;</a>
+              </p>
+            </div><!--/span-->
+          </div><!--/row-->
+          
+        </div><!--/span-->
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2013</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/bootstrap-transition.js"></script>
+    <script src="../assets/js/bootstrap-alert.js"></script>
+    <script src="../assets/js/bootstrap-modal.js"></script>
+    <script src="../assets/js/bootstrap-dropdown.js"></script>
+    <script src="../assets/js/bootstrap-scrollspy.js"></script>
+    <script src="../assets/js/bootstrap-tab.js"></script>
+    <script src="../assets/js/bootstrap-tooltip.js"></script>
+    <script src="../assets/js/bootstrap-popover.js"></script>
+    <script src="../assets/js/bootstrap-button.js"></script>
+    <script src="../assets/js/bootstrap-collapse.js"></script>
+    <script src="../assets/js/bootstrap-carousel.js"></script>
+    <script src="../assets/js/bootstrap-typeahead.js"></script>
+
+  </body>
+</html>

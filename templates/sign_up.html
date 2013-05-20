@@ -105,7 +105,7 @@ $def with (name,errors)
     </div>
     <div class="container">
 
-        <form class="form-signin">
+        <form action="/sign_up" method="POST" class="form-signin">
             <h2 class="form-signin-heading">Sign up for our website!</h2>
             $if errors:
                 $for error in errors:
@@ -118,7 +118,7 @@ $def with (name,errors)
             <input type="password" class="input-block-level" placeholder="Password" name="passwd">
             <input type="password" class="input-block-level" placeholder="Re-enter Password" name="passwdconf">
             <input type="text" class="input-block-level" placeholder="Your Email" name="email">
-            <input type="text" class="input-block-level" placeholder="Re-enter Email" name="nameconf">
+            <input type="text" class="input-block-level" placeholder="Re-enter Email" name="emailconf">
             <input type="text" class="input-block-level" placeholder="Cellphone number" name="cellphone">
             
             <p>
@@ -156,7 +156,7 @@ $def with (name,errors)
             </div>
         </form>
 
-    </div> <!-- /container -
+    </div> <!-- /container -->
 
       <hr>
 

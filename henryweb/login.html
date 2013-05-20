@@ -12,7 +12,7 @@
 		<meta name="author" content="YUAN REN" />
 
 		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
-		<link href="../static/css/bootstrap.css" rel="stylesheet">
+		<link href="css/bootstrap.css" rel="stylesheet">
 		<style type="text/css">
       	body {
         padding-top: 40px;
@@ -54,8 +54,11 @@
       	<form class="form-signin" action="/login" method="POST">
         	<h2 class="form-signin-heading">Please sign in</h2>
         	<input type="text" class="input-block-level" name="user" placeholder="Username">
-        	<input type="password" class="input-block-level" name="passwd" placeholder="Password">
-        	<button class="btn btn-large btn-block btn-primary" type="submit">Sign in</button>
+        	<input type="password" class="input-block-level" name="passwd" placeholder="Password" name="">
+        	<label class="checkbox">
+          	<input type="checkbox" value="remember-me"> Remember me
+        	</label>
+        	<button class="btn btn-large btn-block btn-primary" type="button">Sign in</button>
 			<button class="btn btn-large btn-block" type="button">Cancel</button>
       	</form>
 
