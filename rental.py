@@ -14,7 +14,8 @@ urls = (
     '/del', 'delete',
     '/', 'index',
     '/index', 'index', 
-    '/profile/(.*)', 'show'
+    '/profile/(.*)', 'profile',
+    'show/(.*)', 'show'
 )
 
 app = web.application(urls, locals())
@@ -115,9 +116,9 @@ class new:
     def GET(self):
         message = web.input(message=None).message
         bucket = None
-        des = web.input(des=0).des
-        price = web.input(prise=0).prise
-        status = web.input(status=1).status
+        des = 0
+        price = 0
+        status = '1'
         postname = web.input(postname=None).postname
         return render.new(message, postname, bucket, des, price, status)
 
@@ -126,7 +127,7 @@ class new:
         postname = web.input(postname={}).postname
         alreadyHave = web.input(alreadyHave={})
         des = web.input().des
-        price = web.input().prise
+        price = web.input().price
         status = web.input().status
 
         print postname
@@ -170,7 +171,16 @@ class delete:
         bucket = S3.get_bucket(x.bucketname)
         S3.delFile(x.keyname, x.bucketname)
         message = x.keyname + ' is Deleted'
-        return render.new([message], x.postname, bucket)
+        return render.new([message], x.postname, bucket, x.des, x.price, x.status)
+
+class show:
+    def GET(self, rid):
+        postname='test1'
+        bucket= 'rental_id_7547'
+        des = 'test des'
+        price = '5000'
+        status = 1
+        return render.new(postname, bucket, des, price, status)
 
 
 class index:

@@ -210,11 +210,11 @@ $if message != None:
             </textarea>
             </td>
         </tr>
-            <td>Prise :</td>
+            <td>price :</td>
             $if price:
-                <td><input type='text' name="prise" VALUE=$price></td>
+                <td><input type='text' name="price" VALUE=$price></td>
             $else:
-                <td><input type='text' name="prise" VALUE='set price pls'></td>
+                <td><input type='text' name="price" VALUE='set price pls'></td>
         <tr>
             <td>status :</td>
             $if status:
