@@ -61,13 +61,12 @@ class User:
 
     @classmethod
     def validate_passwd(self, username):
-        sql = "SELECT `password` FROM `User` WHERE `username` = '%s'" %(username)
+        sql = "SELECT `password`,`uid` FROM `User` WHERE `username` = '%s'" %(username)
         cursor = self.conn.cursor()
         cursor.execute(sql)
         ps = cursor.fetchall()
         cursor.close()
-        lst = [x for x, in ps]
-        return lst
+        return ps
 
     @classmethod 
     def find_by_id(self, uid):
