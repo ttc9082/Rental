@@ -40,7 +40,7 @@ $def with (name,rooms)
   </head>
 
   <body>
-
+    $print rooms
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -78,18 +78,34 @@ $def with (name,rooms)
         
         <div class="span12">
           <div class="row-fluid">
-            $for room in rooms:
-                <div class="span4">
-                    <h2><div style="width:600px; padding:5px">
-                        <div style="float:left; margin-right:10px"><img src="js/holder.js/300x200" /></div>
-                    </div></h2>
-                    <p>description</p>
+              $print rooms
+              $x=0
+              $y=0
+              $firsttime=0
+              $for room in rooms:
+                  $if(firsttime==0):
+                      $firsttime=1
+                      $print firsttime
+                      <div class="row-fluid">
+                  $x+=1
+                  $y+=1
+                  $if(x%3==0):
+                      $print x
+                      </div>
+                      <div class="row-fluid">
+                  $S3 = AWS.AWSS3()
+                  $bucket = S3.get_bucket(room[6])
+                  $keyname=bucket.get_all_keys(){0}.name
+                  $url='https://s3.amazonaws.com/'+bucket+'/'+keyname
+                  <div class="span4">
+                  <h2><div style="width:600px; padding:5px">
+                  <div style="float:left; margin-right:10px"><img src="$url"/></div>
+                  </div></h2>
+                  <p>description</p>
                   <p><a class="btn" href="#">View details &raquo;</a></p>
-                </div><!--/span-->
-
-          </div><!--/row-->
+                  </div><!--/span-->
           
-        </div><!--/span-->
+          </div><!--/span-->
       </div><!--/row-->
 
       <hr>
