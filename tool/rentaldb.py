@@ -113,14 +113,14 @@ class User:
 #         self.conn.commit()
 #         return 1
 
-    def delete(self, uid):
-        # DELETE FROM table_name WHERE some_column=some_value
-        cursor = self.conn.cursor()
-        sql = "DELETE FROM `User` WHERE `uid` IN ('%s')" % (uid)
-        cursor.execute(sql)
-        cursor.close()
-        self.conn.commit()
-        return 1
+    # def delete(self, uid):
+    #     # DELETE FROM table_name WHERE some_column=some_value
+    #     cursor = self.conn.cursor()
+    #     sql = "DELETE FROM `User` WHERE `uid` IN ('%s')" % (uid)
+    #     cursor.execute(sql)
+    #     cursor.close()
+    #     self.conn.commit()
+    #     return 1
 
 
 class Room:
@@ -155,3 +155,5 @@ class Room:
 
         self.conn.commit()
         return 1
+
+        

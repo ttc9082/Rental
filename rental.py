@@ -31,6 +31,7 @@ def cellphonecheck(number):
 
 def validName(name):
     return True
+    
 class login:
     def GET(self):
         if logged():
