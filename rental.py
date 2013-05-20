@@ -201,11 +201,29 @@ class index:
         if not logged():
             print 'not logged in'
         all_room = Room.show_all()
+        print all_room
+        titles = []
+        des = []
+        rid = []
+        pics = []
+        for room in all_room:
+            titles.append(room[3])
+            des.append(room[4])
+            rid.append(room[0])
+            s3 = AWS.AWSS3()
+            tmp_bucket = s3.get_bucket(room[6])
+            key = tmp_bucket.get_all_keys()
+            pic = 'https://s3.amazonaws.com/' + tmp_bucket.name + '/' + key[0].name
+            pics.append(pic)
         if logged():
             userName = User.find_by_id(session.userId)
         else:
             userName = ''
-        return render.index(userName)
+        print titles
+        print des
+        print rid
+        print pics
+        return render.index(userName, titles, rid, pics)
 
 
 class profile:
