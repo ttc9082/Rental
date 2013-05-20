@@ -1,0 +1,111 @@
+$def with (title, des, loc, price, bucket, status)
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<table>
+    <tr>
+        <b>Bedroom</b>pics:
+    </tr>
+    <tr>
+        $for key in bucket:
+            $if key.name[:4] == 'bed/':
+                <td>key.name[4:]</td>
+    </tr>
+    <tr>
+        $for key in bucket:
+            $if key.name[:4] == 'bed/':
+                <td><img src="https://s3.amazonaws.com/$bucket.name/$key.name" width="150" height="150"></td>
+    </tr>
+    <tr>
+        <b>Bathroom</b>pics:
+    </tr>
+    <tr>
+        $for key in bucket:
+            $if key.name[:4] == 'bat/':
+                <td>key.name[4:]</td>
+    </tr>
+    <tr>
+        $for key in bucket:
+            $if key.name[:4] == 'bat/':
+                <td><img src="https://s3.amazonaws.com/$bucket.name/$key.name" width="150" height="150"></td>
+    </tr>
+    <tr>
+        <b>Dinning room</b>pics:
+    </tr>
+    <tr>
+        $for key in bucket:
+            $if key.name[:4] == 'din/':
+                <td>key.name[4:]</td>
+    </tr>
+    <tr>
+        $for key in bucket:
+            $if key.name[:4] == 'din/':
+                <td><img src="https://s3.amazonaws.com/$bucket.name/$key.name" width="150" height="150"></td>
+    </tr>
+    <tr>
+        <b>Kitchen</b>pics:
+    </tr>
+    <tr>
+        $for key in bucket:
+            $if key.name[:4] == 'kit/':
+                <td>key.name[4:]</td>
+    </tr>
+    <tr>
+        $for key in bucket:
+            $if key.name[:4] == 'kit/':
+                <td><img src="https://s3.amazonaws.com/$bucket.name/$key.name" width="150" height="150"></td>
+    </tr>
+    <tr>
+        <b>Living room</b>pics:
+    </tr>
+    <tr>
+        $for key in bucket:
+            $if key.name[:4] == 'liv/':
+                <td>key.name[4:]</td>
+    </tr>
+    <tr>
+        $for key in bucket:
+            $if key.name[:4] == 'liv/':
+                <td><img src="https://s3.amazonaws.com/$bucket.name/$key.name" width="150" height="150"></td>
+    </tr>
+    <tr>
+        <b>Other</b>pics:
+    </tr>
+    <tr>
+        $for key in bucket:
+            $if key.name[:4] == 'oth/':
+                <td>key.name[4:]</td>
+    </tr>
+    <tr>
+        $for key in bucket:
+            $if key.name[:4] == 'oth/':
+                <td><img src="https://s3.amazonaws.com/$bucket.name/$key.name" width="150" height="150"></td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <td>Title</td>
+        <td>$title</td>
+    </tr>
+    <tr>
+        <td>Description</td>
+        <td>$des</td>
+    </tr>
+    <tr>
+        <td>Location</td>
+        <td>$loc</td>
+    </tr>
+    <tr>
+        <td>Price</td>
+        <td>$price</td>
+    </tr>
+    <tr>
+        <td>status</td>
+        <td>$status</td>
+    </tr>
+</table>
+</body>
+</html>

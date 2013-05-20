@@ -187,12 +187,18 @@ class delete:
 
 class show:
     def GET(self, rid):
-        postname='test1'
-        bucket= 'rental_id_7547'
-        des = 'test des'
-        price = '5000'
-        status = 1
-        return render.new(postname, bucket, des, price, status)
+        S3 = AWS.AWSS3()
+
+        room = Room.find_by_id(rid)
+        title = room[2]
+        des = room[3]
+        loc = room[4]
+        price = room[5]
+        bucket_name = room[6]
+        bucket = S3.get_bucket(bucket_name)
+        status = room[7]
+
+        return render.show(title, des, loc, price, bucket, status)
 
 
 class index:
